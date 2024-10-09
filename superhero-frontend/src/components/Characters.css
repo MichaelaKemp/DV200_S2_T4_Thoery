@@ -1,0 +1,94 @@
+/* Characters.css */
+
+/* Main container */
+.characters-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Search bar styling */
+  .search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .search-bar input {
+    width: 300px;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ffdd00;
+    color: #000;
+    border: 2px solid black;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  }
+  
+  .search-bar button:hover {
+    background-color: #ff0000;
+    color: #fff;
+  }
+  
+  /* Filter Section */
+  .filter-section {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-section select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
+  }
+  
+  /* Character list and card styling */
+  .character-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .character-card {
+    background-color: white;
+    border: 3px solid black;
+    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 5px black;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .character-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .character-card h3 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: #ff0000;
+    text-shadow: 3px 3px black;
+  }
+  
+  .character-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }  
