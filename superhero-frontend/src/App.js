@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Characters from './components/Characters';
-import Details from './components/Details';
 import Feedback from './components/Feedback';
 import About from './components/About';
+import Details from './components/Details';
 import axios from 'axios';
 
 function App() {
@@ -16,17 +16,17 @@ function App() {
       const result = await axios.get('http://localhost:3001/api/superheroes');
       setSuperheroes(result.data.results);  // Assuming API returns 'results' array
     };
-    fetchSuperheroes();
+    //fetchSuperheroes();
   }, []);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/characters" element={<Characters superheroes={superheroes} />} />
-        <Route path="/characters/:id" element={<Details superheroes={superheroes} />} />
+        <Route path="/characters" element={<Characters />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/about" element={<About />} />
+        <Route path="/details/:id" element={<Details />} /> {/* Add this line */}
       </Routes>
     </Router>
   );

@@ -4,15 +4,17 @@ import './About.css'; // Assuming you'll add custom styles for the About page
 const About = () => {
   return (
     <div>
-      {/* Navigation Bar */}
-      <nav className="navbar">
-        <h1 className="navbar-title">Superhero & Villain Hub</h1>
-        <ul className="navbar-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="#characters">Characters</a></li>
-          <li><a href="#feedback">Feedback</a></li>
-        </ul>
-      </nav>
+      {/* Navigation Bar inside a container */}
+      <div className="navbar-container">
+        <nav className="navbar">
+          <h1 className="navbar-title">Superhero & Villain Hub</h1>
+          <ul className="navbar-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/characters">Characters</a></li>
+            <li><a href="/feedback">Feedback</a></li>
+          </ul>
+        </nav>
+      </div>
 
       {/* Main Content (below the navbar) */}
       <div className="about-container">

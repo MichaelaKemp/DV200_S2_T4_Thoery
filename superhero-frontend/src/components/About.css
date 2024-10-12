@@ -1,6 +1,3 @@
-/* About.css */
-
-/* Apply the halftone background (comic-style dots) */
 body {
     font-family: 'Comic Sans MS', sans-serif;
     background-color: #f2f2f2;
@@ -11,50 +8,68 @@ body {
     padding: 0;
   }
   
-  /* Navigation Bar with a Classic Comic Book Cover Vibe */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffdd00; /* Bright yellow background like comic titles */
-    padding: 20px;
-    border-bottom: 5px solid black; /* Bold black border */
-    box-shadow: 5px 5px 0px black, 5px 5px 0px 5px #ff0000; /* Comic book-style shadow */
-  }
-  
-  .navbar-title {
-    font-size: 2.5rem;
-    color: #ff0000; /* Classic red for the title */
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0;
-    text-shadow: 3px 3px 0px black; /* Comic book outline effect */
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-  }
-  
-  .navbar-links a {
-    color: #000; /* Black links */
-    background-color: #fff;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 3px solid black;
-    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000; /* Pop-art style shadow */
-    transition: background-color 0.3s ease;
-  }
-  
-  .navbar-links a:hover {
-    background-color: #ff0000; /* Red hover effect */
-    color: #fff; /* White text when hovered */
-  }
+ /* Container for the navbar to match the style of other pages */
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Nav bar with pop-art/comic style */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffdd00; /* Bright yellow background */
+  padding: 20px;
+  border-bottom: 5px solid black;
+  box-shadow: 5px 5px 0px black, 5px 5px 0px 5px #ff0000; /* Comic book-style shadow */
+}
+
+.navbar-title {
+  font-size: 2.5rem;
+  color: #ff0000; /* Classic red for the title */
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 3px 3px 0px black; /* Comic book outline effect */
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+.navbar-links a {
+  color: #000; /* Black links */
+  background-color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 3px solid black;
+  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000; /* Pop-art style shadow */
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: #ff0000; /* Red hover effect */
+  color: #fff; /* White text when hovered */
+}
+
+/* Main About Page Container */
+.about-container {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 5px solid black;
+  box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
+  text-align: center;
+}
   
   /* Main About Page Container */
   .about-container {
