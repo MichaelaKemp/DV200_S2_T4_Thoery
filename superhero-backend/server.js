@@ -54,7 +54,8 @@ db.connect((err) => {
 });
 
 // Serve static files from the frontend's build folder
-app.use(express.static(path.join(__dirname, '../superhero-frontend/build')));
+app.use(express.static(path.resolve(__dirname, '../superhero-frontend/build')));
+
 
 // Cache for heroes
 let cachedHeroes = [];
@@ -167,8 +168,9 @@ app.post('/api/feedback', (req, res) => {
 
 // Catch-all route to serve the frontend for any unknown routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../superhero-frontend/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../superhero-frontend/build', 'index.html'));
 });
+
 
 // Start the server
 app.listen(PORT, () => {
