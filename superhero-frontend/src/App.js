@@ -5,6 +5,7 @@ import Characters from './components/Characters';
 import Feedback from './components/Feedback';
 import About from './components/About';
 import Details from './components/Details';
+import Comparison from './components/Comparison';
 import axios from 'axios';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/characters" element={<Characters />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/about" element={<About />} />
+        <Route path="/comparison" element={<Comparison />} />
         <Route path="/details/:id" element={<Details />} /> {/* Add this line */}
       </Routes>
     </Router>

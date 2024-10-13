@@ -1,4 +1,6 @@
+// Feedback.js
 import React, { useState } from 'react';
+import Layout from './Layout'; // Import the Layout component
 import './Feedback.css'; // Assuming you have this styled similarly to the other pages
 
 const Feedback = () => {
@@ -10,59 +12,36 @@ const Feedback = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const feedbackData = {
-      name,
-      surname, // Include surname
-      email,
-      message: feedback
-    };
-
+    const feedbackData = { name, surname, email, message: feedback };
     try {
       const response = await fetch('http://localhost:3001/api/feedback', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(feedbackData),
       });
-
       if (response.ok) {
         setMessage('Thank you for your feedback!');
         setName('');
-        setSurname(''); // Reset surname
+        setSurname('');
         setEmail('');
         setFeedback('');
       } else {
         setMessage('Error submitting feedback, please try again.');
       }
     } catch (error) {
-      console.error('Error submitting feedback:', error);
       setMessage('Error submitting feedback, please try again.');
     }
   };
 
   return (
-    <div>
-      <div className="navbar-container">
-          <nav className="navbar">
-            <h1 className="navbar-title">Superhero & Villain Hub</h1>
-            <ul className="navbar-links">
-              <li><a href="/">Home</a></li>
-              <li><a href="/Characters">Characters</a></li>
-              <li><a href="/About">About</a></li>
-            </ul>
-          </nav>
-        </div>
+    <Layout> {/* Wrap the content in Layout */}
       <div className="page-container">
-        {/* Feedback Form Container */}
         <div className="feedback-container">
           <h2>We Value Your Feedback!</h2>
           <p className="motivation-text">
-            Your opinion matters to us! Let us know what you think about our site, your favorite superheroes, or any improvements we can make to enhance your experience. Fill out the form below, and help us create the best superhero hub out there!
+            Your opinion matters to us! Let us know what you think about our site, your favorite superheroes, or any improvements we can make to enhance your experience.
           </p>
           <form onSubmit={handleSubmit}>
-            {/* Name and Surname side by side */}
             <div className="form-group name-surname-group">
               <div className="name-input">
                 <label htmlFor="name">Name:</label>
@@ -114,7 +93,7 @@ const Feedback = () => {
           {message && <p className="thank-you-message">{message}</p>}
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

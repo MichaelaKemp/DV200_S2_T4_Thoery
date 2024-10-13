@@ -1,0 +1,110 @@
+.comparison-container {
+    padding: 40px;
+    text-align: center;
+}
+  
+.hero-selection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+  
+.select-hero {
+    display: inline-block;
+    text-align: center;
+}
+  
+.select-hero label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 2px 2px #000;
+    margin-right: 10px;
+}
+  
+.select-hero select {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ffdd00;
+    color: #000;
+    border: 3px solid black;
+    cursor: pointer;
+    box-shadow: 5px 5px 0px black, 5px 5px 0px 5px #ff0000;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+  
+.select-hero select:hover {
+    background-color: #ff0000;
+    color: #fff;
+    transform: scale(1.05);
+}
+  
+.comparison-results {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+  
+.comparison-hero-card {
+    width: 450px; /* Fixed width */
+    height: 600px; /* Slightly increased height */
+    margin: 0 auto;
+    padding: 15px; /* Adjusted padding */
+    text-align: center;
+    background-color: #fff;
+    border: 4px solid black;
+    box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
+}
+  
+.comparison-hero-card img {
+    max-width: 45%; /* Reduced image size */
+    height: auto;
+    margin-bottom: 10px;
+}
+  
+.comparison-hero-card h1 {
+    font-size: 1.8rem; /* Reduced header size */
+    margin-bottom: 10px;
+    color: #ff0000;
+    text-shadow: 2px 2px #000;
+}
+  
+.comparison-power-stats {
+    display: flex;
+    flex-direction: column; /* Stack stats vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center them vertically */
+    padding: 0;
+    list-style: none;
+}
+  
+.comparison-power-stats li {
+    padding: 0;
+    margin: 5px;
+    font-size: 1.2rem; /* Reduced font size */
+    display: flex;
+    align-items: center; /* Align the dot with the text */
+    justify-content: center; /* Center the stat horizontally */
+    position: relative; /* For the dot to be positioned properly */
+}
+
+.comparison-power-stats li::before {
+    content: '•'; /* Red dot */
+    color: red;
+    font-size: 1.2rem;
+    margin-right: 5px; /* Add some space between the dot and the text */
+    position: relative;
+    top: 1px; /* Fine-tune alignment */
+}
+  
+.empty-card {
+    font-size: 1.5rem;
+    color: #555;
+}
+  
+.winning-possibility {
+    margin-top: 40px;
+    font-size: 1.8rem;
+    color: #00cc00;
+}

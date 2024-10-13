@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Characters.css';
-import { Link } from 'react-router-dom'; // Import the Link component for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import the Link component for navigation
 import fallbackImage from '../assets/user_icon.png'; // Import the fallback image
+import Layout from './Layout'; // Import the Layout component
+import './Characters.css';
 
 const Characters = () => {
   const [searchQuery, setSearchQuery] = useState(''); // Search input for hero name
   const [heroes, setHeroes] = useState([]); // Stores the hero data
   const [error, setError] = useState('');
   const [alignment, setAlignment] = useState(''); // Selected alignment
+  const navigate = useNavigate(); // React Router's navigate hook
 
   // Fetch all heroes when the component is first mounted
   useEffect(() => {
@@ -86,70 +88,74 @@ const Characters = () => {
     }
   };
 
+  // Function to handle random hero selection
+  const handleRandomize = () => {
+    const randomHero = heroes[Math.floor(Math.random() * heroes.length)]; // Select a random hero
+    if (randomHero) {
+      navigate(`/details/${randomHero.id}`); // Navigate to the details page of the random hero
+    }
+  };
+
   return (
-    <div className="characters-container">
-      <nav className="navbar">
-        <h1 className="navbar-title">Superhero & Villain Hub</h1>
-        <ul className="navbar-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/About">About</a></li>
-          <li><a href="/Feedback">Feedback</a></li>
-        </ul>
-      </nav>
-
-      <div className="explanation-text">
-        <p>
-          Welcome to the Superhero & Villain Hub! Use the search box below to find your favorite heroes by name, 
-          or filter them by their alignment (good, bad, or neutral). Whether you’re searching for a specific hero or exploring different alignments, 
-          this tool will help you find the information you're looking for!
-        </p>
-        <p><em>"With great power comes great responsibility."</em> – Uncle Ben</p>
-      </div>
-
-      <h1>Search by Superhero Name or Filter by Alignment</h1>
-
-      <form className="search-bar" onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Enter Superhero Name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button type="submit">Search by Name</button>
-      </form>
-
-      {error && <p className="error-message">{error}</p>}
-
-      <div className="alignment-dropdown">
-        <label htmlFor="alignment">Filter by Alignment:</label>
-        <select id="alignment" value={alignment} onChange={handleAlignmentChange}>
-          <option value="">All Alignments</option>
-          <option value="good">Good</option>
-          <option value="bad">Bad</option>
-          <option value="neutral">Neutral</option>
-        </select>
-      </div>
-
-      {heroes.length > 0 && (
-        <div className="hero-list">
-          {heroes.map((hero) => (
-            <div key={`${hero.id}-${hero.name}`} className="hero-card">
-              <Link to={`/details/${hero.id}`} className="hero-link">
-                {hero.image && hero.image.url ? (
-                  <img src={hero.image.url} alt={hero.name} onError={(e) => { e.target.src = fallbackImage; }} />
-                ) : (
-                  <img src={fallbackImage} alt="Placeholder" />
-                )}
-                <div className="hero-info">
-                  <h3>{hero.fullName || hero.name}</h3>
-                  <p><strong>Publisher:</strong> {hero.biography.publisher || "Unknown"}</p>
-                </div>
-              </Link>
-            </div>
-          ))}
+    <Layout> {/* Wrapping everything inside the Layout component */}
+      <div className="characters-container">
+        <div className="explanation-text">
+          <p>
+            Welcome to the Superhero & Villain Hub! Use the search box below to find your favorite heroes by name, 
+            or filter them by their alignment (good, bad, or neutral). Whether you’re searching for a specific hero or exploring different alignments, 
+            this tool will help you find the information you're looking for!
+          </p>
+          <p><em>"With great power comes great responsibility."</em> – Uncle Ben</p>
         </div>
-      )}
-    </div>
+
+        <h1>Search by Superhero Name or Filter by Alignment</h1>
+
+        <form className="search-bar" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Enter Superhero Name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search by Name</button>
+          <button type="button" onClick={handleRandomize} className="randomize-button">
+            Randomize
+          </button> {/* New Randomize button */}
+        </form>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <label className="alignment-label">Filter by Alignment:</label>
+        <div className="alignment-dropdown">
+          <select id="alignment" value={alignment} onChange={handleAlignmentChange}>
+            <option value="">All Alignments</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+            <option value="neutral">Neutral</option>
+          </select>
+        </div>
+
+        {heroes.length > 0 && (
+          <div className="hero-list">
+            {heroes.map((hero) => (
+              <div key={`${hero.id}-${hero.name}`} className="hero-card">
+                <Link to={`/details/${hero.id}`} className="hero-link">
+                  {hero.image && hero.image.url ? (
+                    <img src={hero.image.url} alt={hero.name} onError={(e) => { e.target.src = fallbackImage; }} />
+                  ) : (
+                    <img src={fallbackImage} alt="Placeholder" />
+                  )}
+                  <div className="hero-info">
+                    <h3>{hero.fullName || hero.name}</h3>
+                    <p><strong>Publisher:</strong> {hero.biography.publisher || "Unknown"}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Layout>
   );
 };
 

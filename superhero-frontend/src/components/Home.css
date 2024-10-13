@@ -13,42 +13,7 @@ body {
     padding: 40px;
     text-align: center;
   }
-  
-  /* Navbar styling */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #2f2f2f;
-    padding: 15px;
-    border-bottom: 4px solid #ff0000;
-    color: #fff;
-  }
-  
-  .navbar-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-links a {
-    color: #ffdd00;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .navbar-links a:hover {
-    color: #ff0000;
-  }
-  
+
   /* Main Content */
   .main-content {
     margin-top: 50px;
@@ -82,9 +47,3 @@ body {
     background-color: #ffe600;
     box-shadow: 5px 5px 0 #000;
   }
-  
-  /* Halftone dots effect */
-  .halftone {
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px), radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }  
