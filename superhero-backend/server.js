@@ -54,7 +54,7 @@ db.connect((err) => {
 });
 
 // Serve static files from the frontend's build folder
-app.use(express.static(path.resolve(__dirname, '/build')));
+app.use(express.static(path.resolve(__dirname, '/app/build/')));
 
 
 
@@ -169,7 +169,7 @@ app.post('/api/feedback', (req, res) => {
 
 // Catch-all route to serve the frontend for any unknown routes
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '/app/build/', 'index.html'));
 });
 
 
