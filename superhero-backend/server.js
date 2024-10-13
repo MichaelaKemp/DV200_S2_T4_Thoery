@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const mysql = require('mysql2'); // Require mysql2 package
+const path = require('path'); // To serve static files
 const url = require('url'); // To parse the database URL
 
 const app = express();
@@ -51,6 +52,9 @@ db.connect((err) => {
     }
   });
 });
+
+// Serve static files from the frontend's build folder
+app.use(express.static(path.join(__dirname, '../superhero-frontend/build')));
 
 // Cache for heroes
 let cachedHeroes = [];
@@ -159,6 +163,11 @@ app.post('/api/feedback', (req, res) => {
     }
     res.status(200).json({ message: 'Feedback submitted successfully!' });
   });
+});
+
+// Catch-all route to serve the frontend for any unknown routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../superhero-frontend/build', 'index.html'));
 });
 
 // Start the server
