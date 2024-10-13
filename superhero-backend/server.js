@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 // Use CORS to allow cross-origin requests
 app.use(cors({
-  origin: 'https://nameless-temple-24409-5d9ffa948371.herokuapp.com/', // Replace with your actual frontend URL
+  origin: '*', // Allow all origins for testing
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(express.json()); // Parse incoming JSON requests
 
 // Parse the JawsDB connection URL
@@ -59,7 +60,7 @@ db.connect((err) => {
 });
 
 // Serve static files from the frontend's build folder
-app.use(express.static(path.resolve(__dirname, '/app/build/')));
+//app.use(express.static(path.resolve(__dirname, '/app/build/')));
 
 
 
