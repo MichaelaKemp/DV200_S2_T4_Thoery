@@ -75,14 +75,14 @@ const Comparison = () => {
   return (
     <Layout> {/* Wrapping everything in Layout */}
       <div className="comparison-container">
-        <h1>Hero Comparison</h1>
+        <h1>Super Comparison</h1>
 
         <div className="hero-selection">
           {/* Dropdowns for selecting heroes */}
           <div className="select-hero">
-            <label htmlFor="hero1">Select Hero 1:</label>
+            <label htmlFor="hero1">Select Super 1:</label>
             <select id="hero1" value={selectedHero1} onChange={handleHero1Select}>
-              <option value="">Select a hero</option>
+              <option value="">Select a Super</option>
               {heroes.map((hero) => (
                 <option key={hero.id} value={hero.id}>{hero.name}</option>
               ))}
@@ -90,9 +90,9 @@ const Comparison = () => {
           </div>
 
           <div className="select-hero">
-            <label htmlFor="hero2">Select Hero 2:</label>
+            <label htmlFor="hero2">Select Super 2:</label>
             <select id="hero2" value={selectedHero2} onChange={handleHero2Select}>
-              <option value="">Select a hero</option>
+              <option value="">Select a Super</option>
               {heroes.map((hero) => (
                 <option key={hero.id} value={hero.id}>{hero.name}</option>
               ))}

@@ -101,14 +101,14 @@ const Characters = () => {
       <div className="characters-container">
         <div className="explanation-text">
           <p>
-            Welcome to the Superhero & Villain Hub! Use the search box below to find your favorite heroes by name, 
+            Welcome to Supers! Use the search box below to find your favorite heroes by name, 
             or filter them by their alignment (good, bad, or neutral). Whether you’re searching for a specific hero or exploring different alignments, 
             this tool will help you find the information you're looking for!
           </p>
           <p><em>"With great power comes great responsibility."</em> – Uncle Ben</p>
         </div>
 
-        <h1>Search by Superhero Name or Filter by Alignment</h1>
+        <h1>Search by Name or Filter by Alignment</h1>
 
         <form className="search-bar" onSubmit={handleSearch}>
           <input

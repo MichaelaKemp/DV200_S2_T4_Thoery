@@ -7,9 +7,9 @@ const About = () => {
   return (
     <Layout> {/* Wrap the content in Layout */}
       <div className="about-container">
-        <h1>About Superhero & Villain Central Hub</h1>
+        <h1>About Supers</h1>
         <p>
-          Welcome to the Superhero & Villain Central Hub! This website is your one-stop resource
+          Welcome to Supers! This website is your one-stop resource
           for learning about superheroes, their abilities, backstories, and much more. Whether
           you're a fan or simply want to understand what your superhero-loving partner is talking
           about, this site will guide you through the vast world of superheroes and villains.
