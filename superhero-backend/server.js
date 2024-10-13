@@ -3,28 +3,34 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const mysql = require('mysql2'); // Require mysql2 package
+const url = require('url'); // To parse the database URL
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON requests
 
-// Set up MySQL connection
+// Parse the JawsDB connection URL
+const dbUrl = 'mysql://pjhprxukssvt0z0s:wcdi1gggecx6lxny@k9xdebw4k3zynl4u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hemqi27lta38v17n';
+const dbParams = new url.URL(dbUrl);
+
+// Set up MySQL connection using JawsDB
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', // Use your MySQL username
-  password: '', // Leave blank if you don't have a password
-  database: 'superhero_hub', // Your database name
+  host: dbParams.hostname,
+  user: dbParams.username,
+  password: dbParams.password,
+  database: dbParams.pathname.replace('/', ''), // Extract the database name
+  port: dbParams.port || 3306, // Use port from URL or default to 3306
 });
 
-// Connect to the database
+// Connect to the MySQL database
 db.connect((err) => {
   if (err) {
     console.error('Failed to connect to MySQL:', err);
     return;
   }
-  console.log('Connected to MySQL database.');
+  console.log('Connected to JawsDB MySQL database.');
 
   // Create the feedback table if it doesn't exist
   const createFeedbackTable = `
@@ -157,5 +163,5 @@ app.post('/api/feedback', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
+  console.log(`Backend running on port ${PORT}`);
 });
