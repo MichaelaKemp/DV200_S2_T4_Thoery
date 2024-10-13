@@ -15,7 +15,7 @@ const Comparison = () => {
   useEffect(() => {
     const fetchAllHeroes = async () => {
       try {
-        const result = await axios.get('http://localhost:3001/api/heroes'); // Replace with actual API
+        const result = await axios.get('http://nameless-temple-24409.herokuapp.com/api/heroes'); // Replace with actual API
         console.log('All Heroes Fetched:', result.data); // Log all fetched heroes
         setHeroes(result.data);
       } catch (err) {
@@ -28,7 +28,7 @@ const Comparison = () => {
   // Fetch hero details for both heroes
   const fetchHeroDetails = async (heroId, setHero) => {
     try {
-      const result = await axios.get(`http://localhost:3001/api/superhero/${heroId}`);
+      const result = await axios.get(`http://nameless-temple-24409.herokuapp.com/api/superhero/${heroId}`);
       console.log(`Hero Details Fetched for ID ${heroId}:`, result.data); // Log hero details
       setHero(result.data);
     } catch (err) {

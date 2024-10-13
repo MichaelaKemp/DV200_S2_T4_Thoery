@@ -14,7 +14,7 @@ const Details = () => {
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/heroes');
+        const response = await axios.get('http://nameless-temple-24409.herokuapp.com/api/heroes');
         const sortedHeroes = response.data.sort((a, b) => a.name.localeCompare(b.name));
         setHeroList(sortedHeroes);
       } catch (err) {
@@ -28,7 +28,7 @@ const Details = () => {
     const fetchHeroDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:3001/api/superhero/${id}`);
+        const response = await axios.get(`http://nameless-temple-24409.herokuapp.com/api/superhero/${id}`);
         setHero(response.data);
         setLoading(false);
       } catch (err) {
