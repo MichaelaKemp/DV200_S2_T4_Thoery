@@ -12,7 +12,7 @@ const Heroes = () => {
     // Fetch the heroes based on the category
     const fetchHeroes = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/heroes?category=${category}`);
+        const response = await axios.get(`https://localhost:3001/api/heroes?category=${category}`);
         setHeroes(response.data); // Assuming the backend returns filtered heroes based on category
         setLoading(false);
       } catch (error) {

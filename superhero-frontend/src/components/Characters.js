@@ -20,7 +20,7 @@ const Characters = () => {
   // Fetch all heroes from the API
   const fetchAllHeroes = async () => {
     try {
-      const result = await axios.get('http://nameless-temple-24409.herokuapp.com/api/heroes'); // Adjust API endpoint if needed
+      const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes'); // Adjust API endpoint if needed
       const sortedHeroes = result.data.sort((a, b) => a.name.localeCompare(b.name)); // Sort heroes alphabetically by name
       console.log('Total Heroes Fetched:', sortedHeroes.length); // Log the number of heroes fetched
       setHeroes(sortedHeroes);
@@ -51,7 +51,7 @@ const Characters = () => {
 
       // If a search query is provided, search by name
       if (searchQuery) {
-        const result = await axios.get(`http://nameless-temple-24409.herokuapp.com/api/superhero?name=${searchQuery}`);
+        const result = await axios.get(`https://nameless-temple-24409.herokuapp.com/api/superhero?name=${searchQuery}`);
         filteredHeroes = result.data;
         if (filteredHeroes.length === 0) {
           setError('No heroes found with the given name.');
@@ -60,7 +60,7 @@ const Characters = () => {
         }
       } else {
         // Otherwise, fetch all heroes
-        const result = await axios.get('http://nameless-temple-24409.herokuapp.com/api/heroes');
+        const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes');
         filteredHeroes = result.data;
       }
 

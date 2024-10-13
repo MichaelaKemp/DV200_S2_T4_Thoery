@@ -14,7 +14,7 @@ const Feedback = () => {
     e.preventDefault();
     const feedbackData = { name, surname, email, message: feedback };
     try {
-      const response = await fetch('http://nameless-temple-24409.herokuapp.com/api/feedback', {
+      const response = await fetch('https://nameless-temple-24409.herokuapp.com/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(feedbackData),
