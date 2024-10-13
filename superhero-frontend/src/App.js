@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     // Fetch data from the backend once
     const fetchSuperheroes = async () => {
-      const result = await axios.get('http://localhost:3001/api/superheroes');
+      const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/superheroes');
       setSuperheroes(result.data.results);  // Assuming API returns 'results' array
     };
     //fetchSuperheroes();
