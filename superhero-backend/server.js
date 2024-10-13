@@ -11,11 +11,10 @@ const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 // Use CORS to allow cross-origin requests
 app.use(cors({
-  origin: '*', // Allow requests from any origin
+  origin: '*', // Allow requests from any origin (for now)
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
 }));
-
 app.use(express.json()); // Parse incoming JSON requests
 
 // Parse the JawsDB connection URL
@@ -60,7 +59,9 @@ db.connect((err) => {
 });
 
 // Serve static files from the frontend's build folder
-app.use(express.static(path.join(__dirname, '../superhero-frontend/build')));
+app.use(express.static(path.join(__dirname, '/app/build/')));
+
+
 
 // Cache for heroes
 let cachedHeroes = [];
@@ -173,8 +174,9 @@ app.post('/api/feedback', (req, res) => {
 
 // Catch-all route to serve the frontend for any unknown routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../superhero-frontend/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '/app/build/', 'index.html'));
 });
+
 
 // Start the server
 app.listen(PORT, () => {
