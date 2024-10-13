@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 // Use CORS to allow cross-origin requests
 app.use(cors({
-  origin: '*', // Allow requests from any origin (for now)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  origin: 'https://nameless-temple-24409-5d9ffa948371.herokuapp.com/', // Replace with your actual frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json()); // Parse incoming JSON requests
 
