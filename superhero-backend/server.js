@@ -9,7 +9,20 @@ const url = require('url'); // To parse the database URL
 const app = express();
 const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
-app.use(cors()); // Enable CORS for all routes
+// Use CORS to allow cross-origin requests
+// Allow cross-origin requests dynamically
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests from your frontend and localhost (for development)
+    const allowedOrigins = ['https://nameless-temple-24409.herokuapp.com', 'http://localhost:3000'];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json()); // Parse incoming JSON requests
 
 // Parse the JawsDB connection URL
