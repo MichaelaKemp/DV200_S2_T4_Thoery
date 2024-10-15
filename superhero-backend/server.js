@@ -11,12 +11,14 @@ const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 // Use CORS to allow cross-origin requests
 app.use(cors({
-  origin: '*', // Allow all origins for testing
+  origin: 'https://nameless-temple-24409.herokuapp.com', // Your front-end URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(express.json()); // Parse incoming JSON requests
+
+app.options('*', cors()); // This will respond to all OPTIONS requests with the necessary CORS headers
 
 // Parse the JawsDB connection URL
 const dbUrl = 'mysql://pjhprxukssvt0z0s:wcdi1gggecx6lxny@k9xdebw4k3zynl4u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hemqi27lta38v17n';
@@ -60,9 +62,7 @@ db.connect((err) => {
 });
 
 // Serve static files from the frontend's build folder
-//app.use(express.static(path.resolve(__dirname, '/app/build/')));
-
-
+app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 
 // Cache for heroes
 let cachedHeroes = [];
@@ -175,7 +175,7 @@ app.post('/api/feedback', (req, res) => {
 
 // Catch-all route to serve the frontend for any unknown routes
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/app/build/', 'index.html'));
+  res.sendFile(path.join(__dirname, 'superhero-frontend', 'build', 'index.html'));
 });
 
 
