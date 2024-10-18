@@ -50,12 +50,12 @@ app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 // Cache for heroes
 let cachedHeroes = [];
 
-// Function to fetch heroes by letter and add them to the cache
-const fetchHeroesByLetter = async (name) => {
+/// Function to fetch heroes by name and add them to the cache
+const fetchHeroesByName = async (name) => {
   try {
     const apiKey = process.env.SUPERHERO_API_KEY;
     const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${name}`;
-    console.log(`Fetching heroes starting with letter: ${name}`);
+    console.log(`Fetching heroes with the name: ${name}`);
     
     const response = await axios.get(searchUrl);
     
@@ -65,18 +65,20 @@ const fetchHeroesByLetter = async (name) => {
           cachedHeroes.push(hero); // Only add unique heroes to the cache
         }
       });
-      console.log(`Cached heroes after fetching letter ${name}: ${cachedHeroes.length} heroes.`);
+      console.log(`Cached heroes after fetching name ${name}: ${cachedHeroes.length} heroes.`);
+    } else {
+      console.log(`No heroes found with the name: ${name}`);
     }
   } catch (error) {
-    console.error(`Error fetching heroes for letter ${name}:`, error.response?.data || error.message);
+    console.error(`Error fetching heroes for name ${name}:`, error.response?.data || error.message);
   }
 };
 
 // Function to populate cache with heroes
 const initializeHeroCache = async () => {
-  const namesToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
-  for (const name of namesToFetch) {
-    await fetchHeroesByLetter(name);
+  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  for (const letter of lettersToFetch) {
+    await fetchHeroesByLetter(letter);
   }
 };
 
