@@ -10,15 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 
 // Use CORS to allow cross-origin requests
-const corsOptions = {
-  origin: '*', // Allow any origin for testing, change to your frontend URL in production
+app.use(cors({
+  origin: '*', // Allow requests from any origin for testing
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable CORS pre-flight for all routes
+}));
 
 app.use(express.json()); // Parse incoming JSON requests
 
@@ -54,7 +51,7 @@ let cachedHeroes = [];
 const fetchHeroesByLetter = async (letter) => {
   try {
     const apiKey = process.env.SUPERHERO_API_KEY; // Load API key from .env file
-    const allHeroesUrl = `https://superheroapi.com/api/${apiKey}/search/${letter}`; // Use the API key in the request URL
+    const allHeroesUrl = `https://superheroapi.com/api/${apiKey}/search/${letter}`;
     console.log(`Fetching heroes starting with letter: ${letter}`);
     const response = await axios.get(allHeroesUrl);
 
@@ -73,7 +70,7 @@ const fetchHeroesByLetter = async (letter) => {
 
 // Function to populate cache with heroes
 const initializeHeroCache = async () => {
-  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split('');
   for (const letter of lettersToFetch) {
     await fetchHeroesByLetter(letter);
   }
@@ -102,21 +99,20 @@ app.get('/api/heroes', async (req, res) => {
   }
 });
 
-// New API endpoint to search superheroes by name
+// API endpoint to search superheroes by name
 app.get('/api/superhero', async (req, res) => {
-  const heroName = req.query.name?.toLowerCase(); // Normalize the search term to lowercase
+  const heroName = req.query.name?.toLowerCase();
   if (!heroName) {
     return res.status(400).json({ message: 'Please provide a superhero name.' });
   }
 
   try {
-    // Filter the cached heroes based on the name, case-insensitively
     const matchingHeroes = cachedHeroes.filter(hero =>
       hero.name.toLowerCase().includes(heroName)
     );
 
     if (matchingHeroes.length > 0) {
-      res.json(matchingHeroes); // Return matching heroes from the cache
+      res.json(matchingHeroes);
     } else {
       res.status(404).json({ message: `No superhero found with name: ${heroName}` });
     }
@@ -139,7 +135,7 @@ app.get('/api/superhero/:id', async (req, res) => {
     const response = await axios.get(heroUrl);
 
     if (response.data && response.data.response === 'success') {
-      res.json(response.data); // Send back the hero details in JSON format
+      res.json(response.data);
     } else {
       res.status(404).json({ message: `No superhero found with ID: ${heroId}` });
     }
@@ -147,6 +143,25 @@ app.get('/api/superhero/:id', async (req, res) => {
     console.error('Error fetching superhero details:', error.response?.data || error.message);
     res.status(500).json({ message: 'Error fetching superhero data.' });
   }
+});
+
+// Feedback API endpoint
+app.post('/api/feedback', (req, res) => {
+  const { name, surname, email, message } = req.body;
+
+  if (!name || !surname || !email || !message) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  // Insert the feedback into the MySQL database
+  const query = 'INSERT INTO feedback (name, surname, email, message) VALUES (?, ?, ?, ?)';
+  db.query(query, [name, surname, email, message], (err, result) => {
+    if (err) {
+      console.error('Error saving feedback:', err);
+      return res.status(500).json({ message: 'Error saving feedback.' });
+    }
+    res.status(201).json({ message: 'Feedback submitted successfully.' });
+  });
 });
 
 // Catch-all route to serve the frontend for any unknown routes
