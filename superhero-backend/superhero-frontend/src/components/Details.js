@@ -14,7 +14,8 @@ const Details = () => {
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
-        const response = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes');
+        // Use relative URL to call your own backend
+        const response = await axios.get('/api/heroes');
         const sortedHeroes = response.data.sort((a, b) => a.name.localeCompare(b.name));
         setHeroList(sortedHeroes);
       } catch (err) {
@@ -28,7 +29,8 @@ const Details = () => {
     const fetchHeroDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://nameless-temple-24409.herokuapp.com/api/superhero/${id}`);
+        // Use relative URL to call your own backend
+        const response = await axios.get(`/api/superhero/${id}`);
         setHero(response.data);
         setLoading(false);
       } catch (err) {
