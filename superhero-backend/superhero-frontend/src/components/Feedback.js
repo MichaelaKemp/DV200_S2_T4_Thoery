@@ -1,4 +1,3 @@
-// Feedback.js
 import React, { useState } from 'react';
 import Layout from './Layout'; // Import the Layout component
 import './Feedback.css'; // Assuming you have this styled similarly to the other pages
@@ -14,7 +13,7 @@ const Feedback = () => {
     e.preventDefault();
     const feedbackData = { name, surname, email, message: feedback };
     try {
-      const response = await fetch('https://nameless-temple-24409.herokuapp.com/api/feedback', {
+      const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(feedbackData),
