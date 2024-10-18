@@ -8,7 +8,7 @@ import './Characters.css';
 const Characters = () => {
   const [searchQuery, setSearchQuery] = useState(''); // Search input for hero name
   const [heroes, setHeroes] = useState([]); // Stores the hero data
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); // Stores error messages
   const [alignment, setAlignment] = useState(''); // Selected alignment
   const navigate = useNavigate(); // React Router's navigate hook
 
@@ -17,14 +17,24 @@ const Characters = () => {
     fetchAllHeroes();
   }, []);
 
-  // Fetch all heroes from the API
   const fetchAllHeroes = async () => {
     try {
-      const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes'); // Adjust API endpoint if needed
-      const sortedHeroes = result.data.sort((a, b) => a.name.localeCompare(b.name)); // Sort heroes alphabetically by name
-      console.log('Total Heroes Fetched:', sortedHeroes.length); // Log the number of heroes fetched
-      setHeroes(sortedHeroes);
-      setError('');
+      // Use a relative URL to call your own backend
+      const result = await axios.get('/api/heroes');
+  
+      // Log the entire response to check its structure
+      console.log('API response:', result);
+  
+      // Check if the response is successful and is an array
+      if (Array.isArray(result.data)) {
+        const sortedHeroes = result.data.sort((a, b) => a.name.localeCompare(b.name));
+        console.log('Total Heroes Fetched:', sortedHeroes.length);
+        setHeroes(sortedHeroes);
+        setError('');
+      } else {
+        console.error('Unexpected data format:', result.data);
+        setError('Unexpected data format from API.');
+      }
     } catch (err) {
       console.error('Error fetching heroes:', err.response?.data || err.message);
       setError('Unable to fetch heroes. Please try again later.');
@@ -48,37 +58,44 @@ const Characters = () => {
   const filterHeroes = async (searchQuery, alignment) => {
     try {
       let filteredHeroes = [];
-
+  
       // If a search query is provided, search by name
       if (searchQuery) {
-        const result = await axios.get(`https://nameless-temple-24409.herokuapp.com/api/superhero?name=${searchQuery}`);
-        filteredHeroes = result.data;
-        if (filteredHeroes.length === 0) {
+        const result = await axios.get(`/api/superhero?name=${searchQuery}`);
+        if (Array.isArray(result.data)) {
+          filteredHeroes = result.data;
+        } else {
           setError('No heroes found with the given name.');
           setHeroes([]);
           return;
         }
       } else {
         // Otherwise, fetch all heroes
-        const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes');
-        filteredHeroes = result.data;
+        const result = await axios.get('/api/heroes');
+        if (Array.isArray(result.data)) {
+          filteredHeroes = result.data;
+        } else {
+          setError('Unexpected data format from API.');
+          setHeroes([]);
+          return;
+        }
       }
-
+  
       // Apply alignment filter if selected
       if (alignment) {
         filteredHeroes = filteredHeroes.filter(
           (hero) => hero.biography.alignment && hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
         );
-        console.log('Filtered Heroes by Alignment:', filteredHeroes); // Log the filtered heroes
+        console.log('Filtered Heroes by Alignment:', filteredHeroes);
       }
-
+  
       // If no heroes found after filtering by both search and alignment
       if (filteredHeroes.length === 0) {
         setError('No heroes match your search criteria and alignment filter.');
         setHeroes([]);
         return;
       }
-
+  
       // Update the heroes list based on the filtered results
       setHeroes(filteredHeroes);
       setError(''); // Clear any previous error messages

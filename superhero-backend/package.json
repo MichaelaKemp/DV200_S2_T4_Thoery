@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-  "start": "node server.js"
+  "scripts": {
+  "start": "node server.js",
+  "build": "cd superhero-frontend && npm install && npm run build",
+  "postinstall": "npm run build"
 },
   "keywords": [],
   "author": "",

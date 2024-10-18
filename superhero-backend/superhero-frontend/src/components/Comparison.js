@@ -15,7 +15,8 @@ const Comparison = () => {
   useEffect(() => {
     const fetchAllHeroes = async () => {
       try {
-        const result = await axios.get('https://nameless-temple-24409.herokuapp.com/api/heroes'); // Replace with actual API
+        // Use relative URL for API call
+        const result = await axios.get('/api/heroes');
         console.log('All Heroes Fetched:', result.data); // Log all fetched heroes
         setHeroes(result.data);
       } catch (err) {
@@ -28,7 +29,8 @@ const Comparison = () => {
   // Fetch hero details for both heroes
   const fetchHeroDetails = async (heroId, setHero) => {
     try {
-      const result = await axios.get(`https://nameless-temple-24409.herokuapp.com/api/superhero/${heroId}`);
+      // Use relative URL for API call
+      const result = await axios.get(`/api/superhero/${heroId}`);
       console.log(`Hero Details Fetched for ID ${heroId}:`, result.data); // Log hero details
       setHero(result.data);
     } catch (err) {
@@ -108,12 +110,12 @@ const Comparison = () => {
                 <h1>{hero1.name}</h1>
                 {hero1.image && <img src={hero1.image.url} alt={hero1.name} />}
                 <ul className="comparison-power-stats">
-                  {renderStat(hero1.powerstats.intelligence, 'Intelligence', hero2?.powerstats?.intelligence)}
-                  {renderStat(hero1.powerstats.strength, 'Strength', hero2?.powerstats?.strength)}
-                  {renderStat(hero1.powerstats.speed, 'Speed', hero2?.powerstats?.speed)}
-                  {renderStat(hero1.powerstats.durability, 'Durability', hero2?.powerstats?.durability)}
-                  {renderStat(hero1.powerstats.power, 'Power', hero2?.powerstats?.power)}
-                  {renderStat(hero1.powerstats.combat, 'Combat', hero2?.powerstats?.combat)}
+                  {renderStat(hero1.powerstats?.intelligence, 'Intelligence', hero2?.powerstats?.intelligence)}
+                  {renderStat(hero1.powerstats?.strength, 'Strength', hero2?.powerstats?.strength)}
+                  {renderStat(hero1.powerstats?.speed, 'Speed', hero2?.powerstats?.speed)}
+                  {renderStat(hero1.powerstats?.durability, 'Durability', hero2?.powerstats?.durability)}
+                  {renderStat(hero1.powerstats?.power, 'Power', hero2?.powerstats?.power)}
+                  {renderStat(hero1.powerstats?.combat, 'Combat', hero2?.powerstats?.combat)}
                 </ul>
               </>
             ) : (
@@ -127,12 +129,12 @@ const Comparison = () => {
                 <h1>{hero2.name}</h1>
                 {hero2.image && <img src={hero2.image.url} alt={hero2.name} />}
                 <ul className="comparison-power-stats">
-                  {renderStat(hero2.powerstats.intelligence, 'Intelligence', hero1?.powerstats?.intelligence)}
-                  {renderStat(hero2.powerstats.strength, 'Strength', hero1?.powerstats?.strength)}
-                  {renderStat(hero2.powerstats.speed, 'Speed', hero1?.powerstats?.speed)}
-                  {renderStat(hero2.powerstats.durability, 'Durability', hero1?.powerstats?.durability)}
-                  {renderStat(hero2.powerstats.power, 'Power', hero1?.powerstats?.power)}
-                  {renderStat(hero2.powerstats.combat, 'Combat', hero1?.powerstats?.combat)}
+                  {renderStat(hero2.powerstats?.intelligence, 'Intelligence', hero1?.powerstats?.intelligence)}
+                  {renderStat(hero2.powerstats?.strength, 'Strength', hero1?.powerstats?.strength)}
+                  {renderStat(hero2.powerstats?.speed, 'Speed', hero1?.powerstats?.speed)}
+                  {renderStat(hero2.powerstats?.durability, 'Durability', hero1?.powerstats?.durability)}
+                  {renderStat(hero2.powerstats?.power, 'Power', hero1?.powerstats?.power)}
+                  {renderStat(hero2.powerstats?.combat, 'Combat', hero1?.powerstats?.combat)}
                 </ul>
               </>
             ) : (
@@ -144,20 +146,20 @@ const Comparison = () => {
         {/* Calculate and display the winner based on total stats */}
         {hero1 && hero2 && (() => {
           const hero1TotalStats = 
-            getStatValue(hero1.powerstats.intelligence) + 
-            getStatValue(hero1.powerstats.strength) + 
-            getStatValue(hero1.powerstats.speed) + 
-            getStatValue(hero1.powerstats.durability) + 
-            getStatValue(hero1.powerstats.power) + 
-            getStatValue(hero1.powerstats.combat);
+            getStatValue(hero1.powerstats?.intelligence) + 
+            getStatValue(hero1.powerstats?.strength) + 
+            getStatValue(hero1.powerstats?.speed) + 
+            getStatValue(hero1.powerstats?.durability) + 
+            getStatValue(hero1.powerstats?.power) + 
+            getStatValue(hero1.powerstats?.combat);
 
           const hero2TotalStats = 
-            getStatValue(hero2.powerstats.intelligence) + 
-            getStatValue(hero2.powerstats.strength) + 
-            getStatValue(hero2.powerstats.speed) + 
-            getStatValue(hero2.powerstats.durability) + 
-            getStatValue(hero2.powerstats.power) + 
-            getStatValue(hero2.powerstats.combat);
+            getStatValue(hero2.powerstats?.intelligence) + 
+            getStatValue(hero2.powerstats?.strength) + 
+            getStatValue(hero2.powerstats?.speed) + 
+            getStatValue(hero2.powerstats?.durability) + 
+            getStatValue(hero2.powerstats?.power) + 
+            getStatValue(hero2.powerstats?.combat);
 
           // Log totals to check their values
           console.log('Hero 1 Total Stats:', hero1TotalStats, hero1);
