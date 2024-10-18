@@ -175,6 +175,14 @@ app.post('/api/feedback', (req, res) => {
   });
 });
 
+// Feedback API endpoint
+app.post('/api/feedback', (req, res) => {
+  const { name, surname, email, message } = req.body;
+
+  if (!name || !surname || !email || !message) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
   // Insert the feedback into the MySQL database
   const query = 'INSERT INTO feedback (name, surname, email, message) VALUES (?, ?, ?, ?)';
   db.query(query, [name, surname, email, message], (err, result) => {
@@ -182,6 +190,7 @@ app.post('/api/feedback', (req, res) => {
       console.error('Error saving feedback:', err);
       return res.status(500).json({ message: 'Error saving feedback.' });
     }
+    console.log('Feedback saved successfully:', result); // Log the result
     res.status(201).json({ message: 'Feedback submitted successfully.' });
   });
 });
