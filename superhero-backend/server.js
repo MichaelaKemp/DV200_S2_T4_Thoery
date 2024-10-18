@@ -13,11 +13,15 @@ const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
 app.use(cors({
   origin: 'https://nameless-temple-24409.herokuapp.com', // Restrict to your frontend's origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
   credentials: true,
 }));
 
-app.use(express.json()); // Parse incoming JSON requests
+// Handle preflight requests for all routes
+app.options('*', cors());
+
+// Parse incoming JSON requests
+app.use(express.json()); 
 
 // Parse the JawsDB connection URL
 const dbUrl = process.env.JAWSDB_URL || 'your-default-mysql-url';
