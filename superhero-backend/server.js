@@ -64,12 +64,22 @@ app.get('/api/superhero', async (req, res) => {
     }
 
     const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${heroName}`;
+    console.log(`Searching for superheroes with the name: ${heroName}`);
     const response = await axios.get(searchUrl);
 
-    if (response.data.response === "success" && Array.isArray(response.data.results)) {
+    if (response.data.response === 'success' && Array.isArray(response.data.results)) {
+      // Cache the heroes if they are not already cached
+      response.data.results.forEach((hero) => {
+        if (!cachedHeroes.some(cachedHero => cachedHero.id === hero.id)) {
+          cachedHeroes.push(hero); // Only add unique heroes to the cache
+        }
+      });
+      console.log(`Cached heroes count after searching: ${cachedHeroes.length}`);
+      
       res.json(response.data.results); // Send back the list of heroes in JSON format
     } else {
-      res.status(404).json({ message: `No superhero found with name: ${heroName}` });
+      console.log(`No superheroes found with the name: ${heroName}`);
+      res.status(404).json({ message: `No superhero found with the name: ${heroName}` });
     }
   } catch (error) {
     console.error('Error fetching superhero by name:', error.response?.data || error.message);
@@ -77,6 +87,13 @@ app.get('/api/superhero', async (req, res) => {
   }
 });
 
+// Function to populate cache with heroes
+const initializeHeroCache = async () => {
+  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  for (const letter of lettersToFetch) {
+    await fetchHeroesByLetter(letter);
+  }
+};
 
 // API endpoint to fetch all heroes
 app.get('/api/heroes', async (req, res) => {
