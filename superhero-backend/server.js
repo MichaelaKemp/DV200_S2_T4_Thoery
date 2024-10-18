@@ -51,65 +51,32 @@ app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 let cachedHeroes = [];
 
 /// Function to fetch heroes by name and add them to the cache
-const fetchHeroesByName = async (name) => {
-  try {
-    const apiKey = process.env.SUPERHERO_API_KEY;
-    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${name}`;
-    console.log(`Fetching heroes with the name: ${name}`);
-    
-    const response = await axios.get(searchUrl);
-    
+const fetchHeroesByLetter = async (letter) => {
+  try {const apiKey = process.env.SUPERHERO_API_KEY; // Load API key from .env file
+    const allHeroesUrl = `https://superheroapi.com/api/${apiKey}/search/${letter}`; // Use the API key in the request URL
+    console.log(`Fetching heroes starting with letter: ${letter}`);
+    const response = await axios.get(allHeroesUrl);
+
     if (response.data.results && response.data.results.length > 0) {
       response.data.results.forEach((hero) => {
         if (!cachedHeroes.some(cachedHero => cachedHero.id === hero.id)) {
           cachedHeroes.push(hero); // Only add unique heroes to the cache
         }
       });
-      console.log(`Cached heroes after fetching name ${name}: ${cachedHeroes.length} heroes.`);
-    } else {
-      console.log(`No heroes found with the name: ${name}`);
+      console.log(`Cached heroes after fetching letter ${letter}: ${cachedHeroes.length} heroes.`);
     }
   } catch (error) {
-    console.error(`Error fetching heroes for name ${name}:`, error.response?.data || error.message);
+    console.error(`Error fetching heroes for letter ${letter}:`, error.response?.data || error.message);
   }
 };
 
-// API endpoint to search superheroes by name and add them to the cache if found
-app.get('/api/superhero', async (req, res) => {
-  const heroName = req.query.name;
-  if (!heroName) {
-    return res.status(400).json({ message: 'Please provide a superhero name.' });
+// Function to populate cache with heroes
+const initializeHeroCache = async () => {
+  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  for (const letter of lettersToFetch) {
+    await fetchHeroesByLetter(letter);
   }
-
-  try {
-    // Check if the heroes with this name are already in the cache
-    const cachedResults = cachedHeroes.filter((hero) =>
-      hero.name.toLowerCase().includes(heroName.toLowerCase())
-    );
-
-    if (cachedResults.length > 0) {
-      console.log(`Returning ${cachedResults.length} cached heroes for name: ${heroName}`);
-      return res.json(cachedResults); // Return cached heroes if found
-    }
-
-    // If not in the cache, fetch from the external API
-    await fetchHeroesByName(heroName);
-
-    // Filter the cache again to return the results after fetching
-    const matchingHeroes = cachedHeroes.filter((hero) =>
-      hero.name.toLowerCase().includes(heroName.toLowerCase())
-    );
-
-    if (matchingHeroes.length > 0) {
-      res.json(matchingHeroes);
-    } else {
-      res.status(404).json({ message: `No superheroes found with the name: ${heroName}` });
-    }
-  } catch (error) {
-    console.error('Error fetching superhero by name:', error.response?.data || error.message);
-    res.status(500).json({ message: 'Error fetching superhero data.' });
-  }
-});
+};
 
 // API endpoint to fetch all heroes
 app.get('/api/heroes', async (req, res) => {
