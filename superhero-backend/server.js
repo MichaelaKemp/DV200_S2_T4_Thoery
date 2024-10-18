@@ -74,9 +74,9 @@ const fetchHeroesByLetter = async (name) => {
 
 // Function to populate cache with heroes
 const initializeHeroCache = async () => {
-  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
-  for (const letter of lettersToFetch) {
-    await fetchHeroesByLetter(letter);
+  const namesToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  for (const name of namesToFetch) {
+    await fetchHeroesByLetter(name);
   }
 };
 
