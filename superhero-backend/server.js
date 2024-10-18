@@ -50,35 +50,33 @@ app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 // Cache for heroes
 let cachedHeroes = [];
 
-// Function to fetch heroes by letter and add them to the cache
-const fetchHeroesByLetter = async (letter) => {
+// API endpoint to search superheroes by name
+app.get('/api/superhero', async (req, res) => {
+  const heroName = req.query.name;
+  if (!heroName) {
+    return res.status(400).json({ message: 'Please provide a superhero name.' });
+  }
+
   try {
     const apiKey = process.env.SUPERHERO_API_KEY;
-    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${letter}`;
-    console.log(`Fetching heroes starting with letter: ${letter}`);
-    
+    if (!apiKey) {
+      return res.status(500).json({ message: 'API key is missing' });
+    }
+
+    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${heroName}`;
     const response = await axios.get(searchUrl);
-    
-    if (response.data.results && response.data.results.length > 0) {
-      response.data.results.forEach((hero) => {
-        if (!cachedHeroes.some(cachedHero => cachedHero.id === hero.id)) {
-          cachedHeroes.push(hero); // Only add unique heroes to the cache
-        }
-      });
-      console.log(`Cached heroes after fetching letter ${letter}: ${cachedHeroes.length} heroes.`);
+
+    if (response.data.response === "success" && Array.isArray(response.data.results)) {
+      res.json(response.data.results); // Send back the list of heroes in JSON format
+    } else {
+      res.status(404).json({ message: `No superhero found with name: ${heroName}` });
     }
   } catch (error) {
-    console.error(`Error fetching heroes for letter ${letter}:`, error.response?.data || error.message);
+    console.error('Error fetching superhero by name:', error.response?.data || error.message);
+    res.status(500).json({ message: 'Error fetching superhero data.' });
   }
-};
+});
 
-// Function to populate cache with heroes
-const initializeHeroCache = async () => {
-  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
-  for (const letter of lettersToFetch) {
-    await fetchHeroesByLetter(letter);
-  }
-};
 
 // API endpoint to fetch all heroes
 app.get('/api/heroes', async (req, res) => {
