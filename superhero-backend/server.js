@@ -175,11 +175,13 @@ app.post('/api/feedback', (req, res) => {
   });
 });
 
-// Feedback API endpoint
 app.post('/api/feedback', (req, res) => {
+  console.log('Feedback API called'); // Check if the endpoint is being hit
   const { name, surname, email, message } = req.body;
+  console.log('Received data:', { name, surname, email, message }); // Log the received data
 
   if (!name || !surname || !email || !message) {
+    console.log('Validation failed: missing fields');
     return res.status(400).json({ message: 'All fields are required.' });
   }
 
@@ -190,7 +192,7 @@ app.post('/api/feedback', (req, res) => {
       console.error('Error saving feedback:', err);
       return res.status(500).json({ message: 'Error saving feedback.' });
     }
-    console.log('Feedback saved successfully:', result); // Log the result
+    console.log('Feedback saved successfully:', result);
     res.status(201).json({ message: 'Feedback submitted successfully.' });
   });
 });
