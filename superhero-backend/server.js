@@ -50,42 +50,27 @@ app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 // Cache for heroes
 let cachedHeroes = [];
 
-// API endpoint to search superheroes by name
-app.get('/api/superhero', async (req, res) => {
-  const heroName = req.query.name;
-  if (!heroName) {
-    return res.status(400).json({ message: 'Please provide a superhero name.' });
-  }
-
+// Function to fetch heroes by letter and add them to the cache
+const fetchHeroesByLetter = async (name) => {
   try {
     const apiKey = process.env.SUPERHERO_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ message: 'API key is missing' });
-    }
-
-    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${heroName}`;
-    console.log(`Searching for superheroes with the name: ${heroName}`);
+    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${name}`;
+    console.log(`Fetching heroes starting with letter: ${name}`);
+    
     const response = await axios.get(searchUrl);
-
-    if (response.data.response === 'success' && Array.isArray(response.data.results)) {
-      // Cache the heroes if they are not already cached
+    
+    if (response.data.results && response.data.results.length > 0) {
       response.data.results.forEach((hero) => {
         if (!cachedHeroes.some(cachedHero => cachedHero.id === hero.id)) {
           cachedHeroes.push(hero); // Only add unique heroes to the cache
         }
       });
-      console.log(`Cached heroes count after searching: ${cachedHeroes.length}`);
-      
-      res.json(response.data.results); // Send back the list of heroes in JSON format
-    } else {
-      console.log(`No superheroes found with the name: ${heroName}`);
-      res.status(404).json({ message: `No superhero found with the name: ${heroName}` });
+      console.log(`Cached heroes after fetching letter ${name}: ${cachedHeroes.length} heroes.`);
     }
   } catch (error) {
-    console.error('Error fetching superhero by name:', error.response?.data || error.message);
-    res.status(500).json({ message: 'Error fetching superhero data.' });
+    console.error(`Error fetching heroes for letter ${name}:`, error.response?.data || error.message);
   }
-});
+};
 
 // Function to populate cache with heroes
 const initializeHeroCache = async () => {
