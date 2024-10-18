@@ -183,27 +183,17 @@ app.post('/api/feedback', (req, res) => {
     return res.status(400).json({ message: 'All fields are required.' });
   }
 
-  app.post('/api/feedback', (req, res) => {
-    console.log('Feedback API called'); // Log when the endpoint is hit
-    const { name, surname, email, message } = req.body;
-    console.log('Received data:', { name, surname, email, message }); // Log the received data
-  
-    if (!name || !surname || !email || !message) {
-      console.log('Validation failed: missing fields');
-      return res.status(400).json({ message: 'All fields are required.' });
+  // Insert the feedback into the MySQL database
+  const query = 'INSERT INTO feedback (name, surname, email, message) VALUES (?, ?, ?, ?)';
+  db.query(query, [name, surname, email, message], (err, result) => {
+    if (err) {
+      console.error('Error saving feedback:', err);
+      return res.status(500).json({ message: 'Error saving feedback.' });
     }
-  
-    // Insert the feedback into the MySQL database
-    const query = 'INSERT INTO feedback (name, surname, email, message) VALUES (?, ?, ?, ?)';
-    db.query(query, [name, surname, email, message], (err, result) => {
-      if (err) {
-        console.error('Error saving feedback:', err);
-        return res.status(500).json({ message: 'Error saving feedback.' });
-      }
-      console.log('Feedback saved successfully:', result);
-      res.status(201).json({ message: 'Feedback submitted successfully.' });
-    });
-  });  
+    console.log('Feedback saved successfully:', result); // Log the result
+    res.status(201).json({ message: 'Feedback submitted successfully.' });
+  });
+});
 
 // Catch-all route to serve the frontend for any unknown routes
 app.get('*', (req, res) => {
