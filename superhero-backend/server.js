@@ -50,45 +50,53 @@ app.use(express.static(path.join(__dirname, 'superhero-frontend', 'build')));
 // Cache for heroes
 let cachedHeroes = [];
 
-// API endpoint to fetch or search heroes
-app.get('/api/heroes', async (req, res) => {
-  const { name, alignment } = req.query;
+// Function to fetch heroes by letter and add them to the cache
+const fetchHeroesByLetter = async (letter) => {
   try {
     const apiKey = process.env.SUPERHERO_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ message: 'API key is missing' });
+    const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${letter}`;
+    console.log(`Fetching heroes starting with letter: ${letter}`);
+    
+    const response = await axios.get(searchUrl);
+    
+    if (response.data.results && response.data.results.length > 0) {
+      response.data.results.forEach((hero) => {
+        if (!cachedHeroes.some(cachedHero => cachedHero.id === hero.id)) {
+          cachedHeroes.push(hero); // Only add unique heroes to the cache
+        }
+      });
+      console.log(`Cached heroes after fetching letter ${letter}: ${cachedHeroes.length} heroes.`);
+    }
+  } catch (error) {
+    console.error(`Error fetching heroes for letter ${letter}:`, error.response?.data || error.message);
+  }
+};
+
+// Function to populate cache with heroes
+const initializeHeroCache = async () => {
+  const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Fetch heroes for all letters
+  for (const letter of lettersToFetch) {
+    await fetchHeroesByLetter(letter);
+  }
+};
+
+// API endpoint to fetch all heroes
+app.get('/api/heroes', async (req, res) => {
+  try {
+    const { alignment } = req.query;
+
+    // If cache is empty, initialize it by fetching heroes
+    if (cachedHeroes.length === 0) {
+      console.log('Cache is empty, initializing hero cache...');
+      await initializeHeroCache();
     }
 
-    // If a name is provided, search for heroes by name
-    if (name) {
-      const searchUrl = `https://superheroapi.com/api/${apiKey}/search/${name}`;
-      const response = await axios.get(searchUrl);
+    // Filter heroes by alignment if specified
+    const filteredHeroes = alignment
+      ? cachedHeroes.filter((hero) => hero.biography.alignment && hero.biography.alignment.toLowerCase() === alignment.toLowerCase())
+      : cachedHeroes;
 
-      if (response.data.response === 'success' && Array.isArray(response.data.results)) {
-        // Filter heroes by alignment if specified
-        const filteredHeroes = alignment
-          ? response.data.results.filter((hero) => hero.biography.alignment && hero.biography.alignment.toLowerCase() === alignment.toLowerCase())
-          : response.data.results;
-
-        return res.json(filteredHeroes);
-      } else {
-        return res.status(404).json({ message: `No heroes found with the name: ${name}` });
-      }
-    } else {
-      // Fetch all cached heroes if no name is specified
-      if (cachedHeroes.length === 0) {
-        console.log('Cache is empty, fetching all heroes from the external API...');
-        // Optional: You can populate `cachedHeroes` with heroes from an external API if you want
-        // For now, we'll assume the cache stays empty if not populated
-      }
-
-      // Filter cached heroes by alignment if specified
-      const filteredHeroes = alignment
-        ? cachedHeroes.filter((hero) => hero.biography.alignment && hero.biography.alignment.toLowerCase() === alignment.toLowerCase())
-        : cachedHeroes;
-
-      res.json(filteredHeroes);
-    }
+    res.json(filteredHeroes);
   } catch (error) {
     console.error('Error fetching heroes:', error.message);
     res.status(500).json({ message: 'Error fetching heroes.' });
