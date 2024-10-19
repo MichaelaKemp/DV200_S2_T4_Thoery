@@ -126,7 +126,7 @@ const Characters = () => {
         </div>
 
         {loading ? (
-          <p>Loading heroes...</p>
+          <label className="alignment-label">Loading heroes...</label>
         ) : (
           filteredHeroes.length > 0 && (
             <div className="hero-list">
