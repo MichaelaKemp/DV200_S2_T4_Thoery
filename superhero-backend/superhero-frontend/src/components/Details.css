@@ -133,7 +133,6 @@
   .power-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns layout */
-    gap: 5px;
     justify-items: center; /* Center items within each grid cell */
     margin: 0 auto;
   }
