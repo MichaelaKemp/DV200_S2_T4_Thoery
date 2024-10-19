@@ -7,7 +7,7 @@
 
 /* Search bar */
 .search-bar {
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -20,17 +20,6 @@
   border: 2px solid black;
   box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
   height: 30px; /* Set consistent height */
-}
-
-.search-bar button {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  background-color: #ffdd00;
-  color: #000;
-  border: 2px solid black;
-  cursor: pointer;
-  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-  height: 50px; /* Match the height of the input */
 }
 
 .randomize-button {
