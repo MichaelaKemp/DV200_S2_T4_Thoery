@@ -81,9 +81,7 @@ const fetchHeroesByLetter = async (letter) => {
 // Function to populate cache with heroes
 const initializeHeroCache = async () => {
   const lettersToFetch = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  for (const letter of lettersToFetch) {
-    await fetchHeroesByLetter(letter);
-  }
+  await Promise.all(lettersToFetch.map(letter => fetchHeroesByLetter(letter)));
 };
 
 // API endpoint to fetch all heroes
