@@ -118,11 +118,3 @@
     background-color: #ff0000;
     color: #fff;
   }
-
-  .prev-button {
-    visibility: hidden; /* When there are no previous heroes */
-  }
-  
-  .next-button {
-    visibility: visible;
-  }

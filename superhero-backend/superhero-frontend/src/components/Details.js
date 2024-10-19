@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import fallbackImage from '../assets/user_icon.png'; // Import the fallback image
 import './Details.css';
 
 const Details = () => {
@@ -15,6 +14,7 @@ const Details = () => {
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
+        // Use relative URL to call your own backend
         const response = await axios.get('/api/heroes');
         const sortedHeroes = response.data.sort((a, b) => a.name.localeCompare(b.name));
         setHeroList(sortedHeroes);
@@ -29,6 +29,7 @@ const Details = () => {
     const fetchHeroDetails = async () => {
       try {
         setLoading(true);
+        // Use relative URL to call your own backend
         const response = await axios.get(`/api/superhero/${id}`);
         setHero(response.data);
         setLoading(false);
@@ -62,17 +63,14 @@ const Details = () => {
 
   return (
     <div className="details-page">
+      {/* Back Button outside the card (top left) */}
       <button className="back-button" onClick={() => navigate('/characters')}>
         &#8592; Back to Characters
       </button>
 
       <div className="details-container">
         <h1>{hero.name}</h1>
-        <img 
-          src={hero.image && hero.image.url ? hero.image.url : fallbackImage} 
-          alt={hero.name} 
-          onError={(e) => { e.target.src = fallbackImage; }} // Fallback if the image fails to load
-        />
+        {hero.image && <img src={hero.image.url} alt={hero.name} />}
         <p><strong>Full Name:</strong> {hero.biography['full-name'] || 'Unknown'}</p>
         <p><strong>Place of Birth:</strong> {hero.biography['place-of-birth'] || 'Unknown'}</p>
         <p><strong>Publisher:</strong> {hero.biography.publisher || 'Unknown'}</p>
@@ -91,6 +89,7 @@ const Details = () => {
         </ul>
       </div>
 
+      {/* Previous and Next Buttons outside the card */}
       <div className="navigation-buttons">
         {heroIndex > 0 && (
           <button className="prev-button" onClick={handlePrevious}>
