@@ -12,7 +12,7 @@ const heroCache = new Map();
 
 // Use CORS middleware with additional options
 app.use(cors({
-  origin: 'https://supers-hub.herokuapp.com', // Restrict to your frontend's origin
+  origin: 'https://supers-hub-b2090f2bdf4f.herokuapp.com', // Restrict to your frontend's origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
   credentials: true,
