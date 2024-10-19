@@ -109,18 +109,13 @@
     color: #00cc00;
 }
 
-/* Original styles */
-.card {
-    width: 600px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
-  }
+/* Responsive adjustments */
+@media only screen and (max-width: 1024px) {
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+    }
   
-  /* Responsive adjustments */
-  @media only screen and (max-width: 1024px) {
     .card {
       width: 80%;
       padding: 15px;
@@ -132,11 +127,33 @@
       width: 90%;
       padding: 10px;
     }
+  
+    .hero-details {
+      font-size: 14px; /* Adjust font size for readability */
+    }
+  
+    .hero-name {
+      font-size: 18px; /* Adjust hero name size */
+    }
   }
   
   @media only screen and (max-width: 480px) {
     .card {
       width: 95%;
       padding: 5px;
+    }
+  
+    .hero-details {
+      font-size: 12px; /* Further adjustment for very small screens */
+    }
+  
+    .hero-name {
+      font-size: 16px;
+    }
+  
+    /* Adjust dropdown and other elements */
+    .select-super {
+      width: 100%;
+      font-size: 14px;
     }
   }  
