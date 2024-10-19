@@ -49,12 +49,14 @@
   list-style: none;
 }
 
+/* Individual Stat Styling */
 .power-stats li {
   position: relative;
   font-size: 0.9rem;
   padding-left: 10px;
 }
 
+/* Align the red dot */
 .power-stats li::before {
   content: '•';
   position: absolute;
@@ -96,6 +98,7 @@
   padding: 0 25px;
 }
 
+/* Button Styling */
 .prev-button, .next-button {
   background-color: #ffdd00;
   color: #000;
@@ -113,26 +116,26 @@
   .details-container {
     width: 90%; /* Reduce width for smaller screens */
     max-width: 550px;
-    padding: 15px; /* Increase padding for smaller screens */
-    box-sizing: border-box; /* Include padding and border in the element's width */
-    max-height: 75vh; /* Adjust max height */
-    overflow-y: auto; /* Enable scrolling */
+    padding: 15px;
+    box-sizing: border-box;
+    max-height: 75vh;
+    overflow-y: auto;
   }
 
   .details-container h1 {
-    font-size: 1.4rem; /* Reduce title font size */
+    font-size: 1.4rem;
   }
 
   .details-container img {
-    max-width: 50%; /* Increase image size */
+    max-width: 50%;
   }
 
   .power-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns layout */
     gap: 10px;
-    justify-content: center; /* Center the grid */
-    margin: 0 auto; /* Center align */
+    justify-items: center; /* Center items within each grid cell */
+    margin: 0 auto;
   }
 
   .power-stats li {
@@ -140,42 +143,47 @@
     padding-left: 18px;
   }
 
+  .back-button {
+    position: absolute;
+    top: -40px; /* Move above the card */
+    left: 10px;
+  }
+
   .navigation-buttons {
     position: static; /* Remove absolute positioning */
     margin-top: 15px;
-    width: auto; /* Allow content to define width */
     gap: 10px;
+    justify-content: center;
   }
 
   .prev-button, .next-button {
-    font-size: 1rem; /* Reduce button font size */
-    padding: 8px 16px; /* Adjust padding */
-    width: auto; /* Prevent taking up the full width */
+    font-size: 1rem;
+    padding: 8px 16px;
+    width: auto; /* Ensure buttons do not take full width */
   }
 }
 
 @media (max-width: 480px) {
   .details-container {
-    width: 100%; /* Full width for very small screens */
+    width: 100%;
     max-width: 100%;
-    padding: 10px; /* Adjust padding */
+    padding: 10px;
   }
 
   .details-container h1 {
-    font-size: 1.2rem; /* Further reduce title font size */
+    font-size: 1.2rem;
   }
 
   .details-container img {
-    max-width: 45%; /* Adjust image size */
+    max-width: 45%;
   }
 
   .power-stats li {
-    font-size: 0.9rem; /* Maintain readability */
+    font-size: 0.9rem;
   }
 
   .navigation-buttons {
     flex-direction: row;
-    width: auto; /* Prevent taking up full screen */
-    bottom: auto;
+    width: auto;
   }
 }
