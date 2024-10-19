@@ -10,6 +10,13 @@
   padding: 10px;
 }
 
+h1 {
+  font-size: 1.6rem;
+  color: #ff0000;
+  text-shadow: 2px 2px #000;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
 /* Card Styling */
 .details-container {
   width: 650px; /* Original card width */
