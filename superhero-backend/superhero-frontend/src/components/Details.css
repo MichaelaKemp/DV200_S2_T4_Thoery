@@ -52,14 +52,14 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 10px; /* Add more space between the stats */
   padding: 0;
   list-style: none;
 }
 
 .power-stats li {
-  font-size: 0.8rem; /* Make the stats text smaller */
-  color: #333;
+  font-size: 0.8rem; /* Keep the stats text smaller */
+  padding: 0 5px; /* Add padding for spacing */
 }
 
 /* Back Button */
@@ -81,21 +81,19 @@
 /* Navigation Buttons */
 .navigation-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 450px;
-  margin: 0 auto;
+  justify-content: center; /* Center the buttons */
+  gap: 20px; /* Add space between the buttons */
   position: absolute;
   bottom: 15px;
-  gap: 10px; /* Add gap between buttons */
+  width: 100%;
 }
 
 /* Individual Button Styles */
 .prev-button, .next-button {
   background-color: #ffdd00;
   color: #000;
-  padding: 10px 20px; /* Increase button size */
-  font-size: 1rem; /* Increase font size */
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
@@ -115,9 +113,13 @@
     max-width: 50%;
   }
 
+  .power-stats li {
+    font-size: 0.75rem; /* Reduce size slightly for smaller screens */
+  }
+
   .navigation-buttons {
-    width: 95%;
-    gap: 5px;
+    width: 90%;
+    gap: 15px;
   }
 
   .back-button, .prev-button, .next-button {
@@ -142,12 +144,7 @@
   }
 
   .power-stats li {
-    font-size: 0.7rem; /* Further reduce for very small screens */
-  }
-
-  .back-button, .prev-button, .next-button {
-    font-size: 0.8rem;
-    padding: 6px 12px;
+    font-size: 0.7rem;
   }
 
   .navigation-buttons {
