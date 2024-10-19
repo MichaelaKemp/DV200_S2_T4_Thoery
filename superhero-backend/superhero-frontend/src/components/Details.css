@@ -95,10 +95,10 @@
   .navigation-buttons {
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 25px); /* Reduced the width to move buttons away from edges */
+    width: calc(100% - 50px); /* Make sure there's enough space for both buttons */
     position: absolute;
     bottom: 20px;
-    padding: 0 75px; /* Added padding to move the buttons closer to the center */
+    padding: 0 25px; /* Padding to bring buttons away from the edges */
   }
   
   .prev-button, .next-button {
@@ -117,4 +117,12 @@
   .prev-button:hover, .next-button:hover {
     background-color: #ff0000;
     color: #fff;
-  }  
+  }
+
+  .prev-button {
+    visibility: hidden; /* When there are no previous heroes */
+  }
+  
+  .next-button {
+    visibility: visible;
+  }
