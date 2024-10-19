@@ -44,13 +44,23 @@
 
 /* Navbar links */
 .navbar-links {
-  list-style: none;
+  list-style: none; /* Remove default list item styling */
   display: flex;
   gap: 20px;
-  list-style: none; /* Remove default list item styling, including dots */
-  padding: 0; /* Remove any default padding */
+  padding: 0;
   margin: 0;
   transition: transform 0.3s ease-in-out;
+}
+
+/* Ensure the list items themselves don't display markers */
+.navbar-links li {
+  list-style: none; /* Explicitly remove list item markers */
+}
+
+/* If there are any pseudo-elements, disable them */
+.navbar-links li::before,
+.navbar-links li::after {
+  content: none; /* Remove any content added by pseudo-elements */
 }
 
 .navbar-links a {
