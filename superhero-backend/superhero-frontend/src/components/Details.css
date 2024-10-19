@@ -12,7 +12,7 @@
 
 /* Card Styling */
 .details-container {
-  width: 90%; /* Reduce width to prevent cut-off */
+  width: 90%; /* Reduce width to fit within the screen */
   max-width: 550px;
   margin: 0 auto;
   padding: 15px;
@@ -22,6 +22,7 @@
   box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
   max-height: 75vh;
   overflow-y: auto;
+  box-sizing: border-box; /* Include padding and border in the element's width */
 }
 
 /* Hero Title */
@@ -59,8 +60,8 @@
 
 .power-stats li {
   position: relative;
-  font-size: 0.9rem; /* Increased font size */
-  padding-left: 18px; /* Add more padding to make space for the dot */
+  font-size: 0.9rem;
+  padding-left: 18px;
 }
 
 /* Align the red dot */
@@ -70,7 +71,7 @@
   left: 0;
   top: 0;
   color: red;
-  font-size: 1.2rem; /* Adjust dot size */
+  font-size: 1.2rem;
   line-height: 1;
 }
 
@@ -116,8 +117,8 @@
 /* Responsive Design - Media Queries */
 @media (max-width: 768px) {
   .details-container {
-    width: 95%;
-    max-height: 70vh;
+    width: 95%; /* Increase width to fit smaller screens */
+    max-width: 95%; /* Ensure it doesn't exceed the screen size */
     padding: 10px;
   }
 
@@ -126,7 +127,7 @@
   }
 
   .power-stats li {
-    font-size: 0.85rem; /* Slightly reduce size for smaller screens */
+    font-size: 0.85rem;
   }
 
   .navigation-buttons {
@@ -143,7 +144,7 @@
 @media (max-width: 480px) {
   .details-container {
     width: 100%;
-    max-height: 65vh;
+    max-width: 100%;
     padding: 10px;
   }
 
@@ -156,7 +157,7 @@
   }
 
   .power-stats li {
-    font-size: 0.8rem; /* Further reduce for very small screens */
+    font-size: 0.8rem;
   }
 
   .navigation-buttons {
