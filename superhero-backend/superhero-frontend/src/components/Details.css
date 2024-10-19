@@ -13,7 +13,7 @@
   box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
   max-width: 1400px;
   margin: 20px auto;
-  text-align: left;
+  text-align: left; /* Align text to the left */
 }
 
 /* Motivation text to encourage users */
@@ -28,30 +28,30 @@
 .name-surname-group {
   display: flex;
   justify-content: space-between;
-  gap: 70px;
-  margin-bottom: 30px;
+  gap: 70px; /* Adds space between the name and surname fields */
+  margin-bottom: 30px; /* Adds space below the name-surname group */
 }
 
 .name-input, .surname-input {
-  flex: 1;
-  box-sizing: border-box;
+  flex: 1; /* Ensure both input fields take equal width */
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 /* Input fields styling */
 input, textarea {
   width: 100%;
-  padding: 15px;
+  padding: 15px; /* Adjust padding inside the input field */
   font-size: 1.2rem;
   border: 2px solid black;
   box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Adds spacing between inputs and the next element */
 }
 
 /* Form group styling */
 .form-group {
-  margin-bottom: 30px;
-  padding-right: 30px;
-}
+  margin-bottom: 30px; /* Adds space between the form groups */
+  padding-right: 30px; /* Adds padding to the right of the form group */
+}  
 
 label {
   display: block;
@@ -82,49 +82,4 @@ label {
   font-weight: bold;
   color: green;
   margin-top: 20px;
-}
-
-/* Responsive Design - Media Queries */
-@media (max-width: 768px) {
-  .feedback-container {
-    width: 95%;
-    padding: 20px;
-    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 3px black;
-  }
-
-  .name-surname-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  input, textarea {
-    font-size: 1rem;
-    padding: 12px;
-  }
-
-  .submit-btn {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .feedback-container {
-    width: 100%;
-    padding: 15px;
-    box-shadow: 3px 3px 0px #ffdd00, 3px 3px 0px 2px black;
-  }
-
-  .motivation-text {
-    font-size: 1rem;
-  }
-
-  .thank-you-message {
-    font-size: 1.3rem;
-  }
-
-  .submit-btn {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
 }
