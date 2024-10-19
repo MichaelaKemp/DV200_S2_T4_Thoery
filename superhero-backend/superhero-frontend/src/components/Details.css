@@ -1,171 +1,130 @@
-/* Details Page */
-.details-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 97vh;
-  position: relative;
-  overflow: hidden;
-  padding: 10px;
+/* Page container */
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Card Styling */
-.details-container {
-  width: 90%; /* Reduce width to fit within the screen */
-  max-width: 550px;
-  margin: 0 auto;
-  padding: 15px;
-  text-align: center;
+/* Feedback form styling */
+.feedback-container {
   background-color: #fff;
-  border: 4px solid black;
-  box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
-  max-height: 75vh;
-  overflow-y: auto;
-  box-sizing: border-box; /* Include padding and border in the element's width */
+  padding: 40px;
+  border: 5px solid black;
+  box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
+  max-width: 1400px;
+  margin: 20px auto;
+  text-align: left;
 }
 
-/* Hero Title */
-.details-container h1 {
-  font-size: 1.4rem;
-  color: #ff0000;
-  text-shadow: 2px 2px #000;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  margin-bottom: 8px;
-}
-
-/* Hero Image */
-.details-container img {
-  max-width: 60%;
-  height: auto;
-  margin-bottom: 8px;
-}
-
-/* Hero Info */
-.details-container p {
-  font-size: 0.9rem;
+/* Motivation text to encourage users */
+.motivation-text {
+  font-size: 1.2rem;
   color: #333;
-  margin: 4px 0;
+  margin-bottom: 30px;
+  line-height: 1.5;
 }
 
-/* Power Stats */
-.power-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three columns for 3x3 layout */
-  gap: 10px;
-  justify-content: center;
-  padding: 0;
-  list-style: none;
-  max-width: 100%; /* Ensure it fits within the card */
-  margin: 0 auto;
-}
-
-.power-stats li {
-  position: relative;
-  font-size: 1rem; /* Increase font size */
-  padding-left: 20px; /* Make space for the dot */
-  text-align: left; /* Align text for better readability */
-}
-
-/* Align the red dot */
-.power-stats li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: red;
-  font-size: 1.2rem; /* Adjust dot size */
-  line-height: 1;
-}
-
-/* Back Button */
-.back-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #ffdd00;
-  color: #000;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: 2px solid black;
-  border-radius: 5px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-}
-
-/* Navigation Buttons */
-.navigation-buttons {
+/* Name and Surname container */
+.name-surname-group {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
+  justify-content: space-between;
+  gap: 70px;
+  margin-bottom: 30px;
 }
 
-/* Individual Button Styles */
-.prev-button, .next-button {
+.name-input, .surname-input {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+/* Input fields styling */
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  border: 2px solid black;
+  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
+  margin-bottom: 20px;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 30px;
+  padding-right: 30px;
+}
+
+label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+/* Button styling */
+.submit-btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
   background-color: #ffdd00;
   color: #000;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
   border: 2px solid black;
-  border-radius: 5px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  cursor: pointer;
   box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+}
+
+.submit-btn:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+/* Thank you message */
+.thank-you-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: green;
+  margin-top: 20px;
 }
 
 /* Responsive Design - Media Queries */
 @media (max-width: 768px) {
-  .details-container {
-    width: 95%; /* Increase width to fit smaller screens */
-    max-width: 95%; /* Ensure it doesn't exceed the screen size */
-    padding: 10px;
+  .feedback-container {
+    width: 95%;
+    padding: 20px;
+    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 3px black;
   }
 
-  .details-container img {
-    max-width: 50%;
+  .name-surname-group {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .power-stats li {
-    font-size: 0.85rem; /* Slightly reduce size for smaller screens */
+  input, textarea {
+    font-size: 1rem;
+    padding: 12px;
   }
 
-  .navigation-buttons {
-    width: 90%;
-    gap: 15px;
-  }
-
-  .back-button, .prev-button, .next-button {
-    font-size: 0.9rem;
-    padding: 8px 14px;
+  .submit-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .details-container {
+  .feedback-container {
     width: 100%;
-    max-width: 100%;
-    padding: 10px;
+    padding: 15px;
+    box-shadow: 3px 3px 0px #ffdd00, 3px 3px 0px 2px black;
   }
 
-  .details-container h1 {
-    font-size: 1.2rem;
+  .motivation-text {
+    font-size: 1rem;
   }
 
-  .details-container img {
-    max-width: 45%;
+  .thank-you-message {
+    font-size: 1.3rem;
   }
 
-  .power-stats li {
-    font-size: 0.8rem; /* Further reduce for very small screens */
-  }
-
-  .navigation-buttons {
-    flex-direction: row;
-    width: 100%;
-    bottom: 10px;
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
   }
 }
