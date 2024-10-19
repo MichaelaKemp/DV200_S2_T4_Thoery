@@ -33,22 +33,24 @@ app.use(express.json());
 const dbUrl = process.env.JAWSDB_URL || 'your-default-mysql-url';
 const dbParams = new url.URL(dbUrl);
 
-// Set up MySQL connection using JawsDB
-const db = mysql.createConnection({
+// Set up MySQL connection pool using JawsDB
+const db = mysql.createPool({
   host: dbParams.hostname,
   user: dbParams.username,
   password: dbParams.password,
   database: dbParams.pathname.replace('/', ''), // Extract the database name
   port: dbParams.port || 3306, // Use port from URL or default to 3306
+  connectionLimit: 10, // Maximum number of connections in the pool
 });
 
-// Connect to the MySQL database
-db.connect((err) => {
+// Test the database connection
+db.getConnection((err, connection) => {
   if (err) {
     console.error('Failed to connect to MySQL:', err);
     return;
   }
   console.log('Connected to JawsDB MySQL database.');
+  connection.release(); // Release the connection back to the pool
 });
 
 // Serve static files from the frontend's build folder
