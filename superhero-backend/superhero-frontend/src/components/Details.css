@@ -50,18 +50,21 @@
 
 /* Power Stats */
 .power-stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns for 3x3 layout */
   gap: 10px;
+  justify-content: center;
   padding: 0;
   list-style: none;
+  max-width: 100%; /* Ensure it fits within the card */
+  margin: 0 auto;
 }
 
 .power-stats li {
   position: relative;
-  font-size: 0.9rem;
-  padding-left: 18px;
+  font-size: 1rem; /* Increase font size */
+  padding-left: 20px; /* Make space for the dot */
+  text-align: left; /* Align text for better readability */
 }
 
 /* Align the red dot */
@@ -71,7 +74,7 @@
   left: 0;
   top: 0;
   color: red;
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* Adjust dot size */
   line-height: 1;
 }
 
@@ -127,7 +130,7 @@
   }
 
   .power-stats li {
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* Slightly reduce size for smaller screens */
   }
 
   .navigation-buttons {
@@ -157,7 +160,7 @@
   }
 
   .power-stats li {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Further reduce for very small screens */
   }
 
   .navigation-buttons {
