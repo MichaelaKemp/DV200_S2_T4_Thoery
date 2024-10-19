@@ -8,9 +8,10 @@ import './Characters.css';
 const Characters = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [heroes, setHeroes] = useState([]);
-  const [filteredHeroes, setFilteredHeroes] = useState([]); // Separate state for filtered heroes
+  const [filteredHeroes, setFilteredHeroes] = useState([]);
   const [error, setError] = useState('');
   const [alignment, setAlignment] = useState('');
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
 
   // Fetch all heroes only once when the component mounts
@@ -20,6 +21,8 @@ const Characters = () => {
 
   const fetchAllHeroes = async () => {
     try {
+      setLoading(true); // Set loading state
+      setError(''); // Clear any previous errors
       const result = await axios.get('/api/heroes');
       console.log('API response:', result);
 
@@ -28,7 +31,6 @@ const Characters = () => {
         console.log('Total Heroes Fetched:', sortedHeroes.length);
         setHeroes(sortedHeroes);
         setFilteredHeroes(sortedHeroes); // Initialize filtered heroes
-        setError('');
       } else {
         console.error('Unexpected data format:', result.data);
         setError('Unexpected data format from API.');
@@ -36,42 +38,46 @@ const Characters = () => {
     } catch (err) {
       console.error('Error fetching heroes:', err.response?.data || err.message);
       setError('Unable to fetch heroes. Please try again later.');
+    } finally {
+      setLoading(false); // Clear loading state
     }
   };
 
   // Filtering logic moved inside useEffect
   useEffect(() => {
-    filterHeroes(searchQuery, alignment);
-  }, [searchQuery, alignment, heroes]); // Run this effect whenever these dependencies change
+    if (!loading) {
+      filterHeroes(searchQuery, alignment);
+    }
+  }, [searchQuery, alignment, heroes, loading]); // Run this effect whenever these dependencies change
 
   // Filter heroes based on search query and alignment
-const filterHeroes = (searchQuery, alignment) => {
-  setError(''); // Clear any previous error message
-  let filtered = [...heroes];
+  const filterHeroes = (searchQuery, alignment) => {
+    setError(''); // Clear any previous error message
+    let filtered = [...heroes];
 
-  // Filter by search query
-  if (searchQuery) {
-    filtered = filtered.filter(hero => 
-      hero.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter(hero => 
+        hero.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
 
-  // Filter by alignment
-  if (alignment) {
-    filtered = filtered.filter(hero => 
-      hero.biography.alignment && 
-      hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
-    );
-  }
+    // Filter by alignment
+    if (alignment) {
+      filtered = filtered.filter(hero => 
+        hero.biography.alignment && 
+        hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
+      );
+    }
 
-  // Update the filtered heroes state
-  setFilteredHeroes(filtered);
+    // Update the filtered heroes state
+    setFilteredHeroes(filtered);
 
-  // Show error if no heroes match
-  if (filtered.length === 0) {
-    setError('No heroes match your search criteria and alignment filter.');
-  }
-};
+    // Show error if no heroes match and not in loading state
+    if (filtered.length === 0 && !loading) {
+      setError('No heroes match your search criteria and alignment filter.');
+    }
+  };
 
   // Handle random hero selection
   const handleRandomize = () => {
@@ -119,24 +125,28 @@ const filterHeroes = (searchQuery, alignment) => {
           </select>
         </div>
 
-        {filteredHeroes.length > 0 && (
-          <div className="hero-list">
-            {filteredHeroes.map((hero) => (
-              <div key={`${hero.id}-${hero.name}`} className="hero-card">
-                <Link to={`/details/${hero.id}`} className="hero-link">
-                  {hero.image && hero.image.url ? (
-                    <img src={hero.image.url} alt={hero.name} onError={(e) => { e.target.src = fallbackImage; }} />
-                  ) : (
-                    <img src={fallbackImage} alt="Placeholder" />
-                  )}
-                  <div className="hero-info">
-                    <h3>{hero.fullName || hero.name}</h3>
-                    <p><strong>Publisher:</strong> {hero.biography.publisher || "Unknown"}</p>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+        {loading ? (
+          <p>Loading heroes...</p>
+        ) : (
+          filteredHeroes.length > 0 && (
+            <div className="hero-list">
+              {filteredHeroes.map((hero) => (
+                <div key={`${hero.id}-${hero.name}`} className="hero-card">
+                  <Link to={`/details/${hero.id}`} className="hero-link">
+                    {hero.image && hero.image.url ? (
+                      <img src={hero.image.url} alt={hero.name} onError={(e) => { e.target.src = fallbackImage; }} />
+                    ) : (
+                      <img src={fallbackImage} alt="Placeholder" />
+                    )}
+                    <div className="hero-info">
+                      <h3>{hero.fullName || hero.name}</h3>
+                      <p><strong>Publisher:</strong> {hero.biography.publisher || "Unknown"}</p>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )
         )}
       </div>
     </Layout>
