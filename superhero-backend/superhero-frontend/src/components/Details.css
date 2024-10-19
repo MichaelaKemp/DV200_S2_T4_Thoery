@@ -133,6 +133,7 @@
   .power-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns layout */
+    gap: 10px;
     justify-items: center; /* Center items within each grid cell */
     margin: 0 auto;
   }
@@ -179,6 +180,7 @@
 
   .power-stats li {
     font-size: 0.9rem;
+    gap: 3px; /* Further reduce gap for very small screens */
   }
 
   .navigation-buttons {
