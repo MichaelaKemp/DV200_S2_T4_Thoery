@@ -84,18 +84,33 @@ label {
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .feedback-container {
-    width: 100%;
-    padding: 20px;
-    margin: 0; /* Remove margins to make the container touch the screen edges */
-    border-left: none; /* Remove left border to touch the edge */
-    border-right: none; /* Remove right border to touch the edge */
+    padding: 25px;
+    max-width: 90%;
   }
 
   .name-surname-group {
+    gap: 20px;
+  }
+
+  .motivation-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .name-surname-group {
     flex-direction: column;
-    gap: 10px; /* Reduce gap for smaller screens */
+  }
+
+  .name-input, .surname-input {
+    width: 100%;
+  }
+
+  .feedback-container {
+    width: 95%;
+    padding: 20px;
   }
 
   .motivation-text {
@@ -109,13 +124,21 @@ label {
 
 @media (max-width: 480px) {
   .feedback-container {
-    padding: 15px;
     width: 100%;
-    margin: 0 auto;
+    padding: 15px;
+    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 5px black;
+  }
+
+  .motivation-text {
+    font-size: 0.9rem;
   }
 
   .submit-btn {
     width: 100%;
     font-size: 1rem;
+  }
+
+  label {
+    font-size: 1.2rem;
   }
 }
