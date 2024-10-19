@@ -1,34 +1,35 @@
 /* Global Styles */
 body {
   font-family: 'Comic Sans MS', sans-serif;
-  background-color: #f2f2f2; /* Light grey */
+  background-color: #f2f2f2;
   margin: 0;
   padding: 0;
 }
 
-/* Comic book style dots (halftone effect) */
+/* Home Container */
 .home-container {
   background-image: radial-gradient(circle, rgba(255, 215, 0, 0.5) 20%, transparent 20%), radial-gradient(circle, rgba(255, 215, 0, 0.5) 20%, transparent 20%);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
 }
 
 /* Main Content */
 .main-content {
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 20px;
   background-color: #fff;
   border: 5px solid black;
   display: inline-block;
   box-shadow: 10px 10px 0 #ffdd00, 10px 10px 0 0 black;
   max-width: 90%;
+  width: 100%;
 }
 
 /* Main Title */
 .main-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #ff0000;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -37,69 +38,67 @@ body {
 
 /* Description */
 .description {
-  font-size: 1.5rem;
-  line-height: 1.6;
+  font-size: 1.2rem;
+  line-height: 1.4;
   color: #333;
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   font-style: italic;
   border: 3px solid black;
-  padding: 20px;
+  padding: 15px;
   background-color: #ffe600;
   box-shadow: 5px 5px 0 #000;
-}
-
-/* Halftone dots effect */
-.halftone {
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px), radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
 }
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
   .main-title {
-    font-size: 2.5rem;
-  }
-
-  .description {
-    font-size: 1.3rem;
-  }
-
-  .main-content {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .description {
     font-size: 1.1rem;
+    padding: 15px;
   }
 
   .main-content {
-    width: 95%;
-    margin-top: 30px;
+    padding: 15px;
+    margin-top: 20px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .main-title {
     font-size: 1.8rem;
   }
 
   .description {
     font-size: 1rem;
-    padding: 15px;
+    padding: 10px;
+  }
+
+  .main-content {
+    width: 95%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    padding: 10px;
   }
 
   .main-content {
     width: 100%;
+    padding: 10px;
     box-shadow: 5px 5px 0 #ffdd00, 5px 5px 0 0 black;
   }
 }
