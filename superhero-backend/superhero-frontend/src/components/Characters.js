@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'; // Import the Link component for navigation
-import fallbackImage from '../assets/user_icon.png'; // Import the fallback image
-import Layout from './Layout'; // Import the Layout component
+import { Link, useNavigate } from 'react-router-dom';
+import fallbackImage from '../assets/user_icon.png';
+import Layout from './Layout';
 import './Characters.css';
 
 const Characters = () => {
-  const [searchQuery, setSearchQuery] = useState(''); // Search input for hero name
-  const [heroes, setHeroes] = useState([]); // Stores the hero data
-  const [error, setError] = useState(''); // Stores error messages
-  const [alignment, setAlignment] = useState(''); // Selected alignment
-  const navigate = useNavigate(); // React Router's navigate hook
+  const [searchQuery, setSearchQuery] = useState('');
+  const [heroes, setHeroes] = useState([]);
+  const [filteredHeroes, setFilteredHeroes] = useState([]); // Separate state for filtered heroes
+  const [error, setError] = useState('');
+  const [alignment, setAlignment] = useState('');
+  const navigate = useNavigate();
 
-  // Fetch all heroes when the component is first mounted
+  // Fetch all heroes only once when the component mounts
   useEffect(() => {
     fetchAllHeroes();
   }, []);
 
   const fetchAllHeroes = async () => {
     try {
-      // Use a relative URL to call your own backend
       const result = await axios.get('/api/heroes');
-  
-      // Log the entire response to check its structure
       console.log('API response:', result);
-  
-      // Check if the response is successful and is an array
+
       if (Array.isArray(result.data)) {
         const sortedHeroes = result.data.sort((a, b) => a.name.localeCompare(b.name));
         console.log('Total Heroes Fetched:', sortedHeroes.length);
         setHeroes(sortedHeroes);
+        setFilteredHeroes(sortedHeroes); // Initialize filtered heroes
         setError('');
       } else {
         console.error('Unexpected data format:', result.data);
@@ -41,85 +39,56 @@ const Characters = () => {
     }
   };
 
-  // Function to handle alignment selection and filter the current list of heroes
-  const handleAlignmentChange = (e) => {
-    const selectedAlignment = e.target.value;
-    setAlignment(selectedAlignment);
-    filterHeroes(searchQuery, selectedAlignment); // Apply filtering on both search and alignment
-  };
+  // Memoize the filtering logic to avoid unnecessary calculations
+  useMemo(() => {
+    filterHeroes(searchQuery, alignment);
+  }, [searchQuery, alignment, heroes]);
 
-  // Handle search by hero name
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    filterHeroes(searchQuery, alignment); // Apply filtering on both search and alignment
-  };
+  // Filter heroes based on search query and alignment
+  const filterHeroes = (searchQuery, alignment) => {
+    let filtered = [...heroes];
 
-  // Function to filter heroes by search query and alignment
-  const filterHeroes = async (searchQuery, alignment) => {
-    try {
-      let filteredHeroes = [];
-  
-      // If a search query is provided, search by name
-      if (searchQuery) {
-        const result = await axios.get(`/api/superhero?name=${searchQuery}`);
-        if (Array.isArray(result.data)) {
-          filteredHeroes = result.data;
-        } else {
-          setError('No heroes found with the given name.');
-          setHeroes([]);
-          return;
-        }
-      } else {
-        // Otherwise, fetch all heroes
-        const result = await axios.get('/api/heroes');
-        if (Array.isArray(result.data)) {
-          filteredHeroes = result.data;
-        } else {
-          setError('Unexpected data format from API.');
-          setHeroes([]);
-          return;
-        }
-      }
-  
-      // Apply alignment filter if selected
-      if (alignment) {
-        filteredHeroes = filteredHeroes.filter(
-          (hero) => hero.biography.alignment && hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
-        );
-        console.log('Filtered Heroes by Alignment:', filteredHeroes);
-      }
-  
-      // If no heroes found after filtering by both search and alignment
-      if (filteredHeroes.length === 0) {
-        setError('No heroes match your search criteria and alignment filter.');
-        setHeroes([]);
-        return;
-      }
-  
-      // Update the heroes list based on the filtered results
-      setHeroes(filteredHeroes);
-      setError(''); // Clear any previous error messages
-    } catch (err) {
-      console.error('Error fetching or filtering heroes:', err.response?.data || err.message);
-      setError('Unable to fetch heroes. Please try again later.');
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter(hero => 
+        hero.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filter by alignment
+    if (alignment) {
+      filtered = filtered.filter(hero => 
+        hero.biography.alignment && 
+        hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
+      );
+    }
+
+    // Update the filtered heroes state
+    setFilteredHeroes(filtered);
+
+    // Show error if no heroes match
+    if (filtered.length === 0) {
+      setError('No heroes match your search criteria and alignment filter.');
+    } else {
+      setError('');
     }
   };
 
-  // Function to handle random hero selection
+  // Handle random hero selection
   const handleRandomize = () => {
-    const randomHero = heroes[Math.floor(Math.random() * heroes.length)]; // Select a random hero
+    const randomHero = filteredHeroes[Math.floor(Math.random() * filteredHeroes.length)];
     if (randomHero) {
-      navigate(`/details/${randomHero.id}`); // Navigate to the details page of the random hero
+      navigate(`/details/${randomHero.id}`);
     }
   };
 
   return (
-    <Layout> {/* Wrapping everything inside the Layout component */}
+    <Layout>
       <div className="characters-container">
         <div className="explanation-text">
           <p>
-            Welcome to Supers! Use the search box below to find your favorite heroes by name, 
-            or filter them by their alignment (good, bad, or neutral). Whether you’re searching for a specific hero or exploring different alignments, 
+            Welcome to Supers! Use the search box below to find your favorite heroes by name,
+            or filter them by their alignment (good, bad, or neutral). Whether you’re searching for a specific hero or exploring different alignments,
             this tool will help you find the information you're looking for!
           </p>
           <p><em>"With great power comes great responsibility."</em> – Uncle Ben</p>
@@ -127,24 +96,23 @@ const Characters = () => {
 
         <h1>Search by Name or Filter by Alignment</h1>
 
-        <form className="search-bar" onSubmit={handleSearch}>
+        <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             placeholder="Enter Superhero Name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button type="submit">Search by Name</button>
           <button type="button" onClick={handleRandomize} className="randomize-button">
             Randomize
-          </button> {/* New Randomize button */}
+          </button>
         </form>
 
         {error && <p className="error-message">{error}</p>}
 
         <label className="alignment-label">Filter by Alignment:</label>
         <div className="alignment-dropdown">
-          <select id="alignment" value={alignment} onChange={handleAlignmentChange}>
+          <select id="alignment" value={alignment} onChange={(e) => setAlignment(e.target.value)}>
             <option value="">All Alignments</option>
             <option value="good">Good</option>
             <option value="bad">Bad</option>
@@ -152,9 +120,9 @@ const Characters = () => {
           </select>
         </div>
 
-        {heroes.length > 0 && (
+        {filteredHeroes.length > 0 && (
           <div className="hero-list">
-            {heroes.map((hero) => (
+            {filteredHeroes.map((hero) => (
               <div key={`${hero.id}-${hero.name}`} className="hero-card">
                 <Link to={`/details/${hero.id}`} className="hero-link">
                   {hero.image && hero.image.url ? (
