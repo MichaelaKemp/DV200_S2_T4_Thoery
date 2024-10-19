@@ -52,14 +52,26 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px; /* Add more space between the stats */
+  gap: 10px;
   padding: 0;
   list-style: none;
 }
 
 .power-stats li {
-  font-size: 0.8rem; /* Keep the stats text smaller */
-  padding: 0 5px; /* Add padding for spacing */
+  position: relative;
+  font-size: 0.8rem;
+  padding-left: 15px; /* Add padding to make space for the dot */
+}
+
+/* Align the red dot */
+.power-stats li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: red;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /* Back Button */
@@ -81,8 +93,8 @@
 /* Navigation Buttons */
 .navigation-buttons {
   display: flex;
-  justify-content: center; /* Center the buttons */
-  gap: 20px; /* Add space between the buttons */
+  justify-content: center;
+  gap: 20px;
   position: absolute;
   bottom: 15px;
   width: 100%;
