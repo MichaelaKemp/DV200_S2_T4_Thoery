@@ -4,9 +4,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 97vh;
+  height: 97vh; /* Full screen height */
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Prevents scrolling */
   padding: 10px;
 }
 
@@ -15,18 +15,18 @@
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   background-color: #fff;
   border: 4px solid black;
   box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
-  max-height: 85vh;
-  overflow: auto;
+  max-height: 80vh; /* Reduced max-height for smaller screens */
+  overflow-y: auto; /* Allow vertical scrolling inside the card */
 }
 
 /* Hero Title */
 .details-container h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #ff0000;
   text-shadow: 2px 2px #000;
   font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -35,7 +35,7 @@
 
 /* Hero Image */
 .details-container img {
-  max-width: 80%;
+  max-width: 70%; /* Adjust image size to fit within the card */
   height: auto;
   margin-bottom: 10px;
 }
@@ -50,8 +50,8 @@
 /* Back Button */
 .back-button {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 10px;
+  left: 10px;
   background-color: #ffdd00;
   color: #000;
   padding: 8px 16px;
@@ -67,7 +67,9 @@
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   position: absolute;
   bottom: 15px;
   padding: 0 20px;
@@ -89,16 +91,16 @@
 @media (max-width: 768px) {
   .details-container {
     width: 95%;
-    padding: 15px;
-    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 3px black;
+    max-height: 75vh; /* Reduce max-height for smaller screens */
+    padding: 10px;
   }
 
   .details-container img {
-    max-width: 70%;
+    max-width: 60%; /* Further reduce image size */
   }
 
   .navigation-buttons {
-    width: 95%;
+    width: 90%;
     padding: 0 15px;
   }
 
@@ -111,8 +113,8 @@
 @media (max-width: 480px) {
   .details-container {
     width: 100%;
+    max-height: 70vh; /* Further reduce for very small screens */
     padding: 10px;
-    box-shadow: 3px 3px 0px #ffdd00, 3px 3px 0px 2px black;
   }
 
   .details-container h1 {
@@ -120,7 +122,7 @@
   }
 
   .details-container img {
-    max-width: 60%;
+    max-width: 50%; /* Further reduce image size */
   }
 
   .back-button, .prev-button, .next-button {
