@@ -84,34 +84,18 @@ label {
 }
 
 /* Responsive Styles */
-@media (max-width: 1024px) {
-  .feedback-container {
-    padding: 25px;
-    max-width: 90%;
-  }
-
-  .name-surname-group {
-    gap: 20px;
-  }
-
-  .motivation-text {
-    font-size: 1.1rem;
-  }
-}
-
 @media (max-width: 768px) {
+  .feedback-container {
+    width: 100%;
+    padding: 20px;
+    margin: 0; /* Remove margins to make the container touch the screen edges */
+    border-left: none; /* Remove left border to touch the edge */
+    border-right: none; /* Remove right border to touch the edge */
+  }
+
   .name-surname-group {
     flex-direction: column;
-  }
-
-  .name-input, .surname-input {
-    width: 100%;
-  }
-
-  .feedback-container {
-    width: 95%;
-    padding: 20px;
-    margin: 10px auto;
+    gap: 10px; /* Reduce gap for smaller screens */
   }
 
   .motivation-text {
@@ -125,27 +109,13 @@ label {
 
 @media (max-width: 480px) {
   .feedback-container {
-    width: 100%;
     padding: 15px;
-    margin: 0; /* Remove default margins to touch the screen edges */
-    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 5px black;
-  }
-
-  .motivation-text {
-    font-size: 0.9rem;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .submit-btn {
     width: 100%;
     font-size: 1rem;
-  }
-
-  label {
-    font-size: 1.2rem;
-  }
-
-  /* Remove horizontal padding on the page container for smaller screens */
-  .page-container {
-    padding: 0;
   }
 }
