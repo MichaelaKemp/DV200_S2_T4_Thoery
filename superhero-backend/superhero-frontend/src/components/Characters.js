@@ -45,34 +45,33 @@ const Characters = () => {
   }, [searchQuery, alignment, heroes]); // Run this effect whenever these dependencies change
 
   // Filter heroes based on search query and alignment
-  const filterHeroes = (searchQuery, alignment) => {
-    let filtered = [...heroes];
+const filterHeroes = (searchQuery, alignment) => {
+  setError(''); // Clear any previous error message
+  let filtered = [...heroes];
 
-    // Filter by search query
-    if (searchQuery) {
-      filtered = filtered.filter(hero => 
-        hero.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+  // Filter by search query
+  if (searchQuery) {
+    filtered = filtered.filter(hero => 
+      hero.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
 
-    // Filter by alignment
-    if (alignment) {
-      filtered = filtered.filter(hero => 
-        hero.biography.alignment && 
-        hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
-      );
-    }
+  // Filter by alignment
+  if (alignment) {
+    filtered = filtered.filter(hero => 
+      hero.biography.alignment && 
+      hero.biography.alignment.toLowerCase() === alignment.toLowerCase()
+    );
+  }
 
-    // Update the filtered heroes state
-    setFilteredHeroes(filtered);
+  // Update the filtered heroes state
+  setFilteredHeroes(filtered);
 
-    // Show error if no heroes match
-    if (filtered.length === 0) {
-      setError('No heroes match your search criteria and alignment filter.');
-    } else {
-      setError('');
-    }
-  };
+  // Show error if no heroes match
+  if (filtered.length === 0) {
+    setError('No heroes match your search criteria and alignment filter.');
+  }
+};
 
   // Handle random hero selection
   const handleRandomize = () => {
