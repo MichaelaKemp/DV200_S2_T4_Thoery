@@ -172,19 +172,12 @@ app.post('/api/feedback', (req, res) => {
 
   // Insert the feedback into the MySQL database
   const query = 'INSERT INTO feedback (name, surname, email, message) VALUES (?, ?, ?, ?)';
-  db.query(query, [name, surname, email, message], (err, result) => {
-    if (err) {
-      console.error('Error saving feedback:', err);
-      return res.status(500).json({ message: 'Error saving feedback.' });
-    }
-    // Log the result and check the affectedRows
-    if (result.affectedRows > 0) {
-      console.log('Feedback saved successfully:', result);
+    db.execute(query, [name, surname, email, message], (err, result) => {
+      if (err) {
+        console.error('Error saving feedback:', err);
+        return res.status(500).json({ message: 'Error saving feedback.' });
+      }
       res.status(201).json({ message: 'Feedback submitted successfully.' });
-    } else {
-      console.warn('No rows were inserted. Something went wrong.');
-      res.status(500).json({ message: 'Failed to insert feedback.' });
-    }
   });
 });
 
