@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import fallbackImage from '../assets/user_icon.png'; // Import the fallback image
+import fallbackImage from '../assets/user_icon.png';
 import './Details.css';
 
 const Details = () => {
@@ -11,6 +11,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const heroCache = useMemo(() => ({}), []); // Cache for fetched hero details
 
   useEffect(() => {
     const fetchHeroes = async () => {
@@ -27,9 +28,16 @@ const Details = () => {
 
   useEffect(() => {
     const fetchHeroDetails = async () => {
+      if (heroCache[id]) {
+        setHero(heroCache[id]);
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         const response = await axios.get(`/api/superhero/${id}`);
+        heroCache[id] = response.data; // Cache the fetched hero details
         setHero(response.data);
         setLoading(false);
       } catch (err) {
@@ -38,23 +46,22 @@ const Details = () => {
       }
     };
     fetchHeroDetails();
-  }, [id]);
+  }, [id, heroCache]);
 
-  const heroIndex = heroList.findIndex((h) => h.id === id);
+  const heroIndex = useMemo(() => heroList.findIndex((h) => h.id === id), [heroList, id]);
 
-  const handleNext = () => {
-    if (heroIndex !== -1 && heroIndex < heroList.length - 1) {
-      const nextHeroId = heroList[heroIndex + 1].id;
-      navigate(`/details/${nextHeroId}`);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (heroIndex > 0) {
-      const prevHeroId = heroList[heroIndex - 1].id;
-      navigate(`/details/${prevHeroId}`);
-    }
-  };
+  const handleNavigate = useCallback(
+    (direction) => {
+      if (direction === 'next' && heroIndex < heroList.length - 1) {
+        const nextHeroId = heroList[heroIndex + 1].id;
+        navigate(`/details/${nextHeroId}`);
+      } else if (direction === 'prev' && heroIndex > 0) {
+        const prevHeroId = heroList[heroIndex - 1].id;
+        navigate(`/details/${prevHeroId}`);
+      }
+    },
+    [heroIndex, heroList, navigate]
+  );
 
   if (loading) return <p>Loading hero details...</p>;
   if (error) return <p>{error}</p>;
@@ -68,10 +75,12 @@ const Details = () => {
 
       <div className="details-container">
         <h1>{hero.name}</h1>
-        <img 
-          src={hero.image && hero.image.url ? hero.image.url : fallbackImage} 
-          alt={hero.name} 
-          onError={(e) => { e.target.src = fallbackImage; }} // Fallback if the image fails to load
+        <img
+          src={hero.image && hero.image.url ? hero.image.url : fallbackImage}
+          alt={hero.name}
+          onError={(e) => {
+            e.target.src = fallbackImage;
+          }}
         />
         <p><strong>Full Name:</strong> {hero.biography['full-name'] || 'Unknown'}</p>
         <p><strong>Place of Birth:</strong> {hero.biography['place-of-birth'] || 'Unknown'}</p>
@@ -92,16 +101,16 @@ const Details = () => {
       </div>
 
       <div className="navigation-buttons">
-        <button 
-          className="prev-button" 
-          onClick={handlePrevious} 
+        <button
+          className="prev-button"
+          onClick={() => handleNavigate('prev')}
           style={{ visibility: heroIndex > 0 ? 'visible' : 'hidden' }}
         >
           &#8592; Previous
         </button>
-        <button 
-          className="next-button" 
-          onClick={handleNext} 
+        <button
+          className="next-button"
+          onClick={() => handleNavigate('next')}
           style={{ visibility: heroIndex < heroList.length - 1 ? 'visible' : 'hidden' }}
         >
           Next &#8594;
