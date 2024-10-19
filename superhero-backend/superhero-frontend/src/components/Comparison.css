@@ -109,57 +109,56 @@
     color: #00cc00;
 }
 
+/* Responsive adjustments */
 @media only screen and (max-width: 768px) {
-    /* Stack buttons vertically */
-    .button-container {
-      display: flex;
-      flex-direction: column; /* Stack the buttons */
-      align-items: center;
+    /* Stack dropdowns vertically */
+    .hero-selection {
+        flex-direction: column; /* Stack the dropdowns vertically */
+        align-items: center;
     }
-  
-    .button-class {
-      width: 100%; /* Make buttons full-width */
-      margin-bottom: 10px; /* Add spacing between stacked buttons */
+
+    .select-hero {
+        width: 100%; /* Make each dropdown take full width */
+        margin-bottom: 10px; /* Space between dropdowns */
     }
-  
+
     /* Extend the card width and adjust text size */
-    .card {
-      width: 95%; /* Extend the cards to occupy more space */
-      padding: 10px;
+    .comparison-hero-card {
+        width: 90%; /* Extend the cards to occupy more space */
+        height: auto; /* Let the height adjust naturally */
+        padding: 10px;
     }
-  
-    .hero-details {
-      font-size: 14px; /* Smaller font size for readability */
+
+    .comparison-power-stats li {
+        font-size: 1rem; /* Smaller font size for readability */
     }
-  
-    .hero-name {
-      font-size: 18px; /* Adjust name font size */
+
+    .comparison-hero-card h1 {
+        font-size: 1.5rem; /* Adjust name font size */
     }
-  }
+}
   
-  @media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) {
     /* Further stack adjustments for very small screens */
-    .button-container {
-      flex-direction: column; /* Ensure the buttons are stacked */
-      width: 100%;
+    .hero-selection {
+        width: 100%;
     }
-  
-    .button-class {
-      display: block; /* Ensure buttons behave like block elements */
-      width: 100%; /* Full width for buttons */
-      margin-bottom: 10px; /* Add spacing between buttons */
+
+    .select-hero {
+        width: 100%; /* Full width for each dropdown */
+        margin-bottom: 10px; /* Add spacing between dropdowns */
     }
-  
-    .card {
-      width: 100%; /* Extend the cards to fill the screen */
-      padding: 8px;
+
+    .comparison-hero-card {
+        width: 100%; /* Extend the cards to fill the screen */
+        padding: 8px;
     }
-  
-    .hero-details {
-      font-size: 12px; /* Further reduce text size for small screens */
+
+    .comparison-power-stats li {
+        font-size: 0.9rem; /* Further reduce text size for small screens */
     }
-  
-    .hero-name {
-      font-size: 16px;
+
+    .comparison-hero-card h1 {
+        font-size: 1.3rem;
     }
-  }  
+}
