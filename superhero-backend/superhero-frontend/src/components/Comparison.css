@@ -110,50 +110,53 @@
 }
 
 /* Responsive adjustments */
-@media only screen and (max-width: 1024px) {
-    .card-container {
-      flex-direction: column;
-      align-items: center;
+@media only screen and (max-width: 768px) {
+    /* Stack buttons vertically */
+    .select-super {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
     }
   
+    /* Extend the card width and adjust text size */
     .card {
-      width: 80%;
-      padding: 15px;
-    }
-  }
-  
-  @media only screen and (max-width: 768px) {
-    .card {
-      width: 90%;
+      width: 95%; /* Extend the cards to occupy more space */
       padding: 10px;
     }
   
     .hero-details {
-      font-size: 14px; /* Adjust font size for readability */
+      font-size: 14px; /* Smaller font size for readability */
     }
   
     .hero-name {
-      font-size: 18px; /* Adjust hero name size */
+      font-size: 18px; /* Adjust name font size */
     }
   }
   
   @media only screen and (max-width: 480px) {
+    /* Further stack adjustments for very small screens */
+    .select-super {
+      width: 100%;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  
     .card {
-      width: 95%;
-      padding: 5px;
+      width: 100%; /* Extend the cards to fill the screen */
+      padding: 8px;
     }
   
     .hero-details {
-      font-size: 12px; /* Further adjustment for very small screens */
+      font-size: 12px; /* Further reduce text size for small screens */
     }
   
     .hero-name {
       font-size: 16px;
     }
   
-    /* Adjust dropdown and other elements */
-    .select-super {
-      width: 100%;
-      font-size: 14px;
+    /* Adjust the button styling */
+    .button-class {
+      width: 100%; /* Full width for buttons */
+      margin-bottom: 10px; /* Add spacing between buttons */
     }
   }  
