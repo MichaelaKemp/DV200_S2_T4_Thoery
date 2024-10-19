@@ -109,13 +109,17 @@
     color: #00cc00;
 }
 
-/* Responsive adjustments */
 @media only screen and (max-width: 768px) {
     /* Stack buttons vertically */
-    .select-super {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
+    .button-container {
+      display: flex;
+      flex-direction: column; /* Stack the buttons */
+      align-items: center;
+    }
+  
+    .button-class {
+      width: 100%; /* Make buttons full-width */
+      margin-bottom: 10px; /* Add spacing between stacked buttons */
     }
   
     /* Extend the card width and adjust text size */
@@ -135,10 +139,15 @@
   
   @media only screen and (max-width: 480px) {
     /* Further stack adjustments for very small screens */
-    .select-super {
+    .button-container {
+      flex-direction: column; /* Ensure the buttons are stacked */
       width: 100%;
-      font-size: 14px;
-      margin-bottom: 5px;
+    }
+  
+    .button-class {
+      display: block; /* Ensure buttons behave like block elements */
+      width: 100%; /* Full width for buttons */
+      margin-bottom: 10px; /* Add spacing between buttons */
     }
   
     .card {
@@ -152,11 +161,5 @@
   
     .hero-name {
       font-size: 16px;
-    }
-  
-    /* Adjust the button styling */
-    .button-class {
-      width: 100%; /* Full width for buttons */
-      margin-bottom: 10px; /* Add spacing between buttons */
     }
   }  
