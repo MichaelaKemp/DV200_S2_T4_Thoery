@@ -63,9 +63,9 @@ const Details = () => {
     [heroIndex, heroList, navigate]
   );
 
-  if (loading) return <p>Loading hero details...</p>;
-  if (error) return <p>{error}</p>;
-  if (!hero) return <p>Hero not found.</p>;
+  if (loading) return <h1>Loading hero details...</h1>;
+  if (error) return <h1>{error}</h1>;
+  if (!hero) return <h1>Hero not found.</h1>;
 
   return (
     <div className="details-page">
