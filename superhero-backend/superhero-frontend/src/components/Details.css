@@ -12,7 +12,7 @@
 
 /* Card Styling */
 .details-container {
-  width: 95%;
+  width: 90%; /* Reduce width to prevent cut-off */
   max-width: 550px;
   margin: 0 auto;
   padding: 15px;
@@ -59,8 +59,8 @@
 
 .power-stats li {
   position: relative;
-  font-size: 0.8rem;
-  padding-left: 15px; /* Add padding to make space for the dot */
+  font-size: 0.9rem; /* Increased font size */
+  padding-left: 18px; /* Add more padding to make space for the dot */
 }
 
 /* Align the red dot */
@@ -70,7 +70,7 @@
   left: 0;
   top: 0;
   color: red;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Adjust dot size */
   line-height: 1;
 }
 
@@ -126,7 +126,7 @@
   }
 
   .power-stats li {
-    font-size: 0.75rem; /* Reduce size slightly for smaller screens */
+    font-size: 0.85rem; /* Slightly reduce size for smaller screens */
   }
 
   .navigation-buttons {
@@ -156,7 +156,7 @@
   }
 
   .power-stats li {
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* Further reduce for very small screens */
   }
 
   .navigation-buttons {
