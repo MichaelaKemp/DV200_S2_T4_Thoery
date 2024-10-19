@@ -1,134 +1,188 @@
-/* Page container */
-.page-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Feedback form styling */
-.feedback-container {
-  background-color: #fff;
-  padding: 40px;
-  border: 5px solid black;
-  box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
-  max-width: 1400px;
-  margin: 20px auto;
-  text-align: left; /* Align text to the left */
-}
-
-/* Motivation text to encourage users */
-.motivation-text {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 30px;
-  line-height: 1.5;
-}
-
-/* Name and Surname container */
-.name-surname-group {
+/* Details Page */
+.details-page {
   display: flex;
-  justify-content: space-between;
-  gap: 70px; /* Adds space between the name and surname fields */
-  margin-bottom: 30px; /* Adds space below the name-surname group */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center vertically */
+  height: 97vh; /* Full screen height */
+  position: relative;
+  overflow: hidden; /* Prevents scrolling */
+  padding: 10px;
 }
 
-.name-input, .surname-input {
-  flex: 1; /* Ensure both input fields take equal width */
-  box-sizing: border-box; /* Ensure padding is included in the width */
+/* Card Styling */
+.details-container {
+  width: 650px; /* Default card width for larger screens */
+  margin: 0 auto;
+  padding: 8px; /* Reduced padding */
+  text-align: center;
+  background-color: #fff;
+  border: 4px solid black;
+  box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
+  max-height: 90vh; /* Ensure the card doesn't exceed 90% of the viewport height */
+  overflow: auto; /* Allow content scrolling inside the card if needed */
 }
 
-/* Input fields styling */
-input, textarea {
-  width: 100%;
-  padding: 15px; /* Adjust padding inside the input field */
+/* Hero Title */
+.details-container h1 {
+  font-size: 1.6rem; /* Reduced slightly */
+  color: #ff0000;
+  text-shadow: 2px 2px #000;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-bottom: 5px;
+}
+
+/* Hero Image */
+.details-container img {
+  max-width: 30%; /* Reduced image size */
+  height: auto;
+  margin-bottom: 8px;
+}
+
+/* Power Stats */
+.power-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.power-stats li {
+  position: relative;
+  font-size: 0.9rem; /* Kept smaller for compactness */
+  padding-left: 10px;
+}
+
+.power-stats li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: red;
   font-size: 1.2rem;
-  border: 2px solid black;
-  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
-  margin-bottom: 20px; /* Adds spacing between inputs and the next element */
 }
 
-/* Form group styling */
-.form-group {
-  margin-bottom: 30px; /* Adds space between the form groups */
-  padding-right: 30px; /* Adds padding to the right of the form group */
+/* Hero Info */
+.details-container p {
+  font-size: 1rem; /* Kept compact */
+  color: #333;
+  margin: 4px 0;
 }
 
-label {
-  display: block;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #000;
-}
-
-/* Button styling */
-.submit-btn {
-  padding: 10px 20px;
-  font-size: 1.2rem;
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   background-color: #ffdd00;
   color: #000;
-  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 1.2rem;
   cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.submit-btn:hover {
+.back-button:hover {
   background-color: #ff0000;
   color: #fff;
 }
 
-/* Thank you message */
-.thank-you-message {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: green;
-  margin-top: 20px;
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 50px); /* Make sure there's enough space for both buttons */
+  position: absolute;
+  bottom: 20px;
+  padding: 0 25px; /* Padding to bring buttons away from the edges */
+}
+
+.prev-button, .next-button {
+  background-color: #ffdd00;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.prev-button:hover, .next-button:hover {
+  background-color: #ff0000;
+  color: #fff;
 }
 
 /* Responsive Design - Media Queries */
 @media (max-width: 768px) {
-  .feedback-container {
-    width: 95%; /* Reduce the width for smaller screens */
-    padding: 30px; /* Reduce padding for smaller screens */
-    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 3px black; /* Lighter shadow */
+  .details-container {
+    width: 90%; /* Reduce width for smaller screens */
+    padding: 20px; /* Increase padding for a more spacious feel */
+    box-shadow: 6px 6px 0px #ffdd00, 6px 6px 0px 3px black; /* Slightly lighter shadow */
   }
 
-  .name-surname-group {
-    flex-direction: column; /* Stack the inputs vertically */
-    gap: 20px; /* Reduce gap between the fields */
+  .details-container h1 {
+    font-size: 1.4rem; /* Reduce title font size */
   }
 
-  input, textarea {
-    font-size: 1rem; /* Smaller font size */
-    padding: 12px; /* Smaller padding */
+  .details-container img {
+    max-width: 40%; /* Increase image size slightly */
   }
 
-  .submit-btn {
-    font-size: 1rem; /* Smaller font for the button */
-    padding: 8px 16px; /* Smaller padding for the button */
+  .power-stats li {
+    font-size: 0.85rem; /* Slightly reduce font size */
   }
 
-  .thank-you-message {
-    font-size: 1.3rem; /* Smaller font size for the thank-you message */
+  .back-button {
+    font-size: 1rem; /* Reduce font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+
+  .prev-button, .next-button {
+    font-size: 1rem; /* Reduce button font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+
+  .navigation-buttons {
+    width: calc(100% - 30px); /* Make the buttons take up more space */
+    padding: 0 15px; /* Reduce padding */
   }
 }
 
 @media (max-width: 480px) {
-  .feedback-container {
+  .details-container {
     width: 100%; /* Full width for very small screens */
-    padding: 20px; /* Further reduce padding */
-    box-shadow: 3px 3px 0px #ffdd00, 3px 3px 0px 2px black; /* Even lighter shadow */
+    padding: 15px; /* Further reduce padding */
+    box-shadow: 4px 4px 0px #ffdd00, 4px 4px 0px 2px black; /* Even lighter shadow */
   }
 
-  .motivation-text {
-    font-size: 1rem; /* Smaller font size for motivation text */
+  .details-container h1 {
+    font-size: 1.2rem; /* Further reduce title font size */
   }
 
-  .thank-you-message {
-    font-size: 1.2rem; /* Even smaller font for the thank-you message */
+  .details-container img {
+    max-width: 50%; /* Increase image size for better visibility */
   }
 
-  .submit-btn {
-    font-size: 0.9rem; /* Smaller font size for the button */
-    padding: 6px 12px; /* Smaller padding for the button */
+  .power-stats li {
+    font-size: 0.8rem; /* Smaller font size for very small screens */
+  }
+
+  .back-button, .prev-button, .next-button {
+    font-size: 0.9rem; /* Smaller font size for buttons */
+    padding: 6px 12px; /* Adjust padding */
+  }
+
+  .navigation-buttons {
+    flex-direction: column; /* Stack the buttons vertically */
+    width: 100%; /* Full width for navigation buttons */
+    bottom: 10px; /* Adjust position */
   }
 }
