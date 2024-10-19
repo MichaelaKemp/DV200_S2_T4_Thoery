@@ -47,6 +47,8 @@
   list-style: none;
   display: flex;
   gap: 20px;
+  list-style: none; /* Remove default list item styling, including dots */
+  padding: 0; /* Remove any default padding */
   margin: 0;
   transition: transform 0.3s ease-in-out;
 }
