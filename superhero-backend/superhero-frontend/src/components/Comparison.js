@@ -17,7 +17,6 @@ const Comparison = () => {
     const fetchAllHeroes = async () => {
       try {
         const result = await axios.get('/api/heroes');
-        console.log('All Heroes Fetched:', result.data);
         setHeroes(result.data);
       } catch (err) {
         setError('Error fetching heroes, please try again later.');
@@ -26,7 +25,7 @@ const Comparison = () => {
     fetchAllHeroes();
   }, []);
 
-  // Debounced function to fetch hero details
+  // Function to fetch hero details with caching
   const fetchHeroDetails = useCallback(async (heroId, setHero) => {
     if (heroCache[heroId]) {
       setHero(heroCache[heroId]);
@@ -35,7 +34,6 @@ const Comparison = () => {
 
     try {
       const result = await axios.get(`/api/superhero/${heroId}`);
-      console.log(`Hero Details Fetched for ID ${heroId}:`, result.data);
       heroCache[heroId] = result.data; // Cache the hero details
       setHero(result.data);
     } catch (err) {
@@ -43,30 +41,42 @@ const Comparison = () => {
     }
   }, [heroCache]);
 
-  const handleHeroSelect = (heroId, setSelectedHero, setHero) => {
+  // Handle hero selection and fetch details
+  const handleHeroSelect = useCallback((heroId, setSelectedHero, setHero) => {
     setSelectedHero(heroId);
     if (heroId) {
       fetchHeroDetails(heroId, setHero);
     } else {
       setHero(null); // Reset hero details if no hero is selected
     }
-  };
+  }, [fetchHeroDetails]);
 
   // Handle null values and convert stats to integers
   const getStatValue = (stat) => (stat === null || stat === 'null' ? 0 : parseInt(stat, 10));
 
   // Compare stats and return the appropriate color
-  const compareStats = (stat1, stat2) => {
+  const compareStats = useCallback((stat1, stat2) => {
     const stat1Val = getStatValue(stat1);
     const stat2Val = getStatValue(stat2);
     return stat1Val > stat2Val ? 'green' : stat1Val < stat2Val ? 'red' : 'orange';
-  };
+  }, []);
 
-  const renderStat = (stat, statName, comparisonStat) => (
+  const renderStat = useCallback((stat, statName, comparisonStat) => (
     <li style={{ color: compareStats(stat, comparisonStat) }}>
       {statName}: {stat !== null && stat !== 'null' ? stat : 'N/A'}
     </li>
-  );
+  ), [compareStats]);
+
+  // Memoize the total stats calculation for performance
+  const calculateTotalStats = useCallback((hero) => {
+    return ['intelligence', 'strength', 'speed', 'durability', 'power', 'combat'].reduce(
+      (total, stat) => total + getStatValue(hero.powerstats?.[stat]),
+      0
+    );
+  }, []);
+
+  const hero1TotalStats = useMemo(() => (hero1 ? calculateTotalStats(hero1) : 0), [hero1, calculateTotalStats]);
+  const hero2TotalStats = useMemo(() => (hero2 ? calculateTotalStats(hero2) : 0), [hero2, calculateTotalStats]);
 
   return (
     <Layout>
@@ -115,26 +125,15 @@ const Comparison = () => {
           ))}
         </div>
 
-        {hero1 && hero2 && (() => {
-          const calculateTotalStats = (hero) =>
-            ['intelligence', 'strength', 'speed', 'durability', 'power', 'combat'].reduce((total, stat) => total + getStatValue(hero.powerstats?.[stat]), 0);
-
-          const hero1TotalStats = calculateTotalStats(hero1);
-          const hero2TotalStats = calculateTotalStats(hero2);
-
-          console.log('Hero 1 Total Stats:', hero1TotalStats, hero1);
-          console.log('Hero 2 Total Stats:', hero2TotalStats, hero2);
-
-          return (
-            <div className="winning-possibility">
-              <h2>
-                {hero1TotalStats > hero2TotalStats
-                  ? `${hero1.name} has a higher chance of winning!`
-                  : `${hero2.name} has a higher chance of winning!`}
-              </h2>
-            </div>
-          );
-        })()}
+        {hero1 && hero2 && (
+          <div className="winning-possibility">
+            <h2>
+              {hero1TotalStats > hero2TotalStats
+                ? `${hero1.name} has a higher chance of winning!`
+                : `${hero2.name} has a higher chance of winning!`}
+            </h2>
+          </div>
+        )}
       </div>
     </Layout>
   );
