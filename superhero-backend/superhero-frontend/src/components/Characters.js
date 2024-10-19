@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import fallbackImage from '../assets/user_icon.png';
@@ -39,10 +39,10 @@ const Characters = () => {
     }
   };
 
-  // Memoize the filtering logic to avoid unnecessary calculations
-  useMemo(() => {
+  // Filtering logic moved inside useEffect
+  useEffect(() => {
     filterHeroes(searchQuery, alignment);
-  }, [searchQuery, alignment, heroes]);
+  }, [searchQuery, alignment, heroes]); // Run this effect whenever these dependencies change
 
   // Filter heroes based on search query and alignment
   const filterHeroes = (searchQuery, alignment) => {
