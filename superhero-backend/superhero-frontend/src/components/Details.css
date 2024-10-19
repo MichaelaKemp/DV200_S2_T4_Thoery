@@ -4,47 +4,47 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 97vh; /* Full screen height */
+  height: 97vh;
   position: relative;
-  overflow: hidden; /* Prevents scrolling */
+  overflow: hidden;
   padding: 10px;
 }
 
 /* Card Styling */
 .details-container {
   width: 90%;
-  max-width: 600px;
+  max-width: 550px;
   margin: 0 auto;
   padding: 15px;
   text-align: center;
   background-color: #fff;
   border: 4px solid black;
   box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
-  max-height: 80vh; /* Reduced max-height for smaller screens */
-  overflow-y: auto; /* Allow vertical scrolling inside the card */
+  max-height: 75vh; /* Further reduce max-height for smaller screens */
+  overflow-y: auto; /* Allow vertical scrolling inside the card if needed */
 }
 
 /* Hero Title */
 .details-container h1 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #ff0000;
   text-shadow: 2px 2px #000;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* Hero Image */
 .details-container img {
-  max-width: 70%; /* Adjust image size to fit within the card */
+  max-width: 60%; /* Further reduce image size for smaller screens */
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* Hero Info */
 .details-container p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #333;
-  margin: 5px 0;
+  margin: 4px 0;
 }
 
 /* Back Button */
@@ -54,8 +54,8 @@
   left: 10px;
   background-color: #ffdd00;
   color: #000;
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 6px 12px;
+  font-size: 0.9rem;
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
@@ -67,19 +67,19 @@
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
   position: absolute;
-  bottom: 15px;
-  padding: 0 20px;
+  bottom: 10px; /* Move buttons higher for better visibility */
+  padding: 0 15px;
 }
 
+/* Individual Button Styles */
 .prev-button, .next-button {
   background-color: #ffdd00;
   color: #000;
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 6px 12px;
+  font-size: 0.9rem;
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
@@ -91,49 +91,50 @@
 @media (max-width: 768px) {
   .details-container {
     width: 95%;
-    max-height: 75vh; /* Reduce max-height for smaller screens */
+    max-height: 70vh; /* Reduce max-height for smaller screens */
     padding: 10px;
   }
 
   .details-container img {
-    max-width: 60%; /* Further reduce image size */
+    max-width: 50%;
   }
 
   .navigation-buttons {
-    width: 90%;
-    padding: 0 15px;
-  }
-
-  .back-button, .prev-button, .next-button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .details-container {
-    width: 100%;
-    max-height: 70vh; /* Further reduce for very small screens */
-    padding: 10px;
-  }
-
-  .details-container h1 {
-    font-size: 1.4rem;
-  }
-
-  .details-container img {
-    max-width: 50%; /* Further reduce image size */
+    width: 95%;
+    bottom: 5px; /* Further move buttons higher */
+    padding: 0 10px;
   }
 
   .back-button, .prev-button, .next-button {
     font-size: 0.8rem;
     padding: 5px 10px;
   }
+}
+
+@media (max-width: 480px) {
+  .details-container {
+    width: 100%;
+    max-height: 65vh; /* Further reduce max-height for very small screens */
+    padding: 10px;
+  }
+
+  .details-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .details-container img {
+    max-width: 45%;
+  }
+
+  .back-button, .prev-button, .next-button {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
 
   .navigation-buttons {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    bottom: 10px;
+    gap: 8px;
+    bottom: 5px;
   }
 }
