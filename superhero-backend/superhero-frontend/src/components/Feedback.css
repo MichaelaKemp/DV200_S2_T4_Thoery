@@ -1,144 +1,85 @@
 /* Page container */
 .page-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Feedback form styling */
-.feedback-container {
-  background-color: #fff;
-  padding: 30px;
-  border: 5px solid black;
-  box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
-  max-width: 100%;
-  margin: 20px auto;
-  text-align: left;
-}
-
-/* Motivation text to encourage users */
-.motivation-text {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Feedback form styling */
+  .feedback-container {
+    background-color: #fff;
+    padding: 40px;
+    border: 5px solid black;
+    box-shadow: 10px 10px 0px #ffdd00, 10px 10px 0px 5px black;
+    max-width: 1400px;
+    margin: 20px auto;
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* Motivation text to encourage users */
+  .motivation-text {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
 /* Name and Surname container */
 .name-surname-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  margin-bottom: 20px;
-}
-
-.name-input, .surname-input {
-  flex: 1;
-  box-sizing: border-box;
-}
-
-/* Input fields styling */
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  font-size: 1.2rem;
-  border: 2px solid black;
-  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
-  margin-bottom: 15px;
-}
-
-/* Form group styling */
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: #000;
-}
-
-/* Button styling */
-.submit-btn {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  background-color: #ffdd00;
-  color: #000;
-  border: 2px solid black;
-  cursor: pointer;
-  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-}
-
-.submit-btn:hover {
-  background-color: #ff0000;
-  color: #fff;
-}
-
-/* Thank you message */
-.thank-you-message {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: green;
-  margin-top: 20px;
-}
-
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .feedback-container {
-    padding: 25px;
-    max-width: 90%;
+    display: flex;
+    justify-content: space-between;
+    gap: 70px; /* Adds space between the name and surname fields */
+    margin-bottom: 30px; /* Adds space below the name-surname group */
   }
-
-  .name-surname-group {
-    gap: 20px;
-  }
-
-  .motivation-text {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .name-surname-group {
-    flex-direction: column;
-  }
-
+  
   .name-input, .surname-input {
+    flex: 1; /* Ensure both input fields take equal width */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+  
+  /* Input fields styling */
+  input, textarea {
     width: 100%;
-  }
-
-  .feedback-container {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .motivation-text {
-    font-size: 1rem;
-  }
-
-  label {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .feedback-container {
-    width: 100%;
-    padding: 15px;
-    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 5px black;
-  }
-
-  .motivation-text {
-    font-size: 0.9rem;
-  }
-
-  .submit-btn {
-    width: 100%;
-    font-size: 1rem;
-  }
-
-  label {
+    padding: 15px; /* Adjust padding inside the input field */
     font-size: 1.2rem;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ffdd00;
+    margin-bottom: 20px; /* Adds spacing between inputs and the next element */
   }
-}
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 30px; /* Adds space between the form groups */
+    padding-right: 30px; /* Adds padding to the right of the form group */
+  }  
+  
+  label {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  /* Button styling */
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ffdd00;
+    color: #000;
+    border: 2px solid black;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  }
+  
+  .submit-btn:hover {
+    background-color: #ff0000;
+    color: #fff;
+  }
+  
+  /* Thank you message */
+  .thank-you-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+  }  
