@@ -131,20 +131,26 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns layout */
     gap: 10px;
+    justify-content: center; /* Center the grid */
+    margin: 0 auto; /* Center align */
   }
 
   .power-stats li {
-    font-size: 0.85rem; /* Slightly smaller font for compactness */
-  }
-
-  .back-button, .prev-button, .next-button {
-    font-size: 1rem; /* Reduce button font size */
-    padding: 8px 16px; /* Adjust padding */
+    font-size: 1rem; /* Increase font size */
+    padding-left: 18px;
   }
 
   .navigation-buttons {
-    width: 95%;
-    gap: 15px; /* Reduce gap */
+    position: static; /* Remove absolute positioning */
+    margin-top: 15px;
+    width: auto; /* Allow content to define width */
+    gap: 10px;
+  }
+
+  .prev-button, .next-button {
+    font-size: 1rem; /* Reduce button font size */
+    padding: 8px 16px; /* Adjust padding */
+    width: auto; /* Prevent taking up the full width */
   }
 }
 
@@ -164,12 +170,12 @@
   }
 
   .power-stats li {
-    font-size: 0.8rem; /* Smaller font size for very small screens */
+    font-size: 0.9rem; /* Maintain readability */
   }
 
   .navigation-buttons {
-    flex-direction: column; /* Stack buttons vertically */
-    width: 100%;
-    bottom: 10px; /* Adjust position */
+    flex-direction: row;
+    width: auto; /* Prevent taking up full screen */
+    bottom: auto;
   }
 }
