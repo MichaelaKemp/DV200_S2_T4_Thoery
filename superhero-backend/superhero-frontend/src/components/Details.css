@@ -1,120 +1,111 @@
 .details-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center vertically */
-    height: 97vh; /* Full screen height */
-    position: relative;
-    overflow: hidden; /* Prevents scrolling */
-    padding: 10px;
-  }
-  
-  /* Card Styling */
-  .details-container {
-    width: 650px; /* Made the card wider */
-    margin: 0 auto;
-    padding: 8px; /* Reduced padding */
-    text-align: center;
-    background-color: #fff;
-    border: 4px solid black;
-    box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
-    max-height: 90vh; /* Ensure the card doesn't exceed 90% of the viewport height */
-    overflow: auto; /* Allow content scrolling inside the card if needed */
-  }
-  
-  /* Hero Title */
-  .details-container h1 {
-    font-size: 1.6rem; /* Reduced slightly */
-    color: #ff0000;
-    text-shadow: 2px 2px #000;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    margin-bottom: 5px;
-  }
-  
-  /* Hero Image */
-  .details-container img {
-    max-width: 30%; /* Reduced image size */
-    height: auto;
-    margin-bottom: 8px;
-  }
-  
-  /* Power Stats */
-  .power-stats {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .power-stats li {
-    position: relative;
-    font-size: 0.9rem; /* Kept smaller for compactness */
-    padding-left: 10px;
-  }
-  
-  .power-stats li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: red;
-    font-size: 1.2rem;
-  }
-  
-  /* Hero Info */
-  .details-container p {
-    font-size: 1rem; /* Kept compact */
-    color: #333;
-    margin: 4px 0;
-  }
-  
-  /* Back Button */
-  .back-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #ffdd00;
-    color: #000;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #ff0000;
-    color: #fff;
-  }
-  
-  /* Navigation Buttons */
-  .navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 25px); /* Reduced the width to move buttons away from edges */
-    position: absolute;
-    bottom: 20px;
-    padding: 0 75px; /* Added padding to move the buttons closer to the center */
-  }
-  
-  .prev-button, .next-button {
-    background-color: #ffdd00;
-    color: #000;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .prev-button:hover, .next-button:hover {
-    background-color: #ff0000;
-    color: #fff;
-  }  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 97vh;
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+}
+
+/* Card Styling */
+.details-container {
+  width: 650px;
+  margin: 0 auto;
+  padding: 8px;
+  text-align: center;
+  background-color: #fff;
+  border: 4px solid black;
+  box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+/* Hero Title */
+.details-container h1 {
+  font-size: 1.6rem;
+  color: #ff0000;
+  text-shadow: 2px 2px #000;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-bottom: 5px;
+}
+
+/* Hero Image */
+.details-container img {
+  max-width: 30%;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+/* Power Stats */
+.power-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.power-stats li {
+  position: relative;
+  font-size: 0.9rem;
+  padding-left: 10px;
+}
+
+.power-stats li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: red;
+  font-size: 1.2rem;
+}
+
+/* Hero Info */
+.details-container p {
+  font-size: 1rem;
+  color: #333;
+  margin: 4px 0;
+}
+
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ffdd00;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Full width to ensure even spacing */
+  position: absolute;
+  bottom: 20px;
+  padding: 0 25px; /* Padding to bring buttons away from the edges */
+}
+
+/* Ensure buttons are visible even if one is missing */
+.prev-button {
+  visibility: visible;
+}
+
+.next-button {
+  visibility: visible;
+}
