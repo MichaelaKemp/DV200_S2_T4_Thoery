@@ -51,7 +51,7 @@ input, textarea {
 .form-group {
   margin-bottom: 30px; /* Adds space between the form groups */
   padding-right: 30px; /* Adds padding to the right of the form group */
-}  
+}
 
 label {
   display: block;
@@ -82,4 +82,53 @@ label {
   font-weight: bold;
   color: green;
   margin-top: 20px;
+}
+
+/* Responsive Design - Media Queries */
+@media (max-width: 768px) {
+  .feedback-container {
+    width: 95%; /* Reduce the width for smaller screens */
+    padding: 30px; /* Reduce padding for smaller screens */
+    box-shadow: 5px 5px 0px #ffdd00, 5px 5px 0px 3px black; /* Lighter shadow */
+  }
+
+  .name-surname-group {
+    flex-direction: column; /* Stack the inputs vertically */
+    gap: 20px; /* Reduce gap between the fields */
+  }
+
+  input, textarea {
+    font-size: 1rem; /* Smaller font size */
+    padding: 12px; /* Smaller padding */
+  }
+
+  .submit-btn {
+    font-size: 1rem; /* Smaller font for the button */
+    padding: 8px 16px; /* Smaller padding for the button */
+  }
+
+  .thank-you-message {
+    font-size: 1.3rem; /* Smaller font size for the thank-you message */
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback-container {
+    width: 100%; /* Full width for very small screens */
+    padding: 20px; /* Further reduce padding */
+    box-shadow: 3px 3px 0px #ffdd00, 3px 3px 0px 2px black; /* Even lighter shadow */
+  }
+
+  .motivation-text {
+    font-size: 1rem; /* Smaller font size for motivation text */
+  }
+
+  .thank-you-message {
+    font-size: 1.2rem; /* Even smaller font for the thank-you message */
+  }
+
+  .submit-btn {
+    font-size: 0.9rem; /* Smaller font size for the button */
+    padding: 6px 12px; /* Smaller padding for the button */
+  }
 }
