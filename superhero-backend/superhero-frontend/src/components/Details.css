@@ -185,5 +185,6 @@
   .navigation-buttons {
     flex-direction: row;
     width: auto;
+    padding-top: 30px;
   }
 }
