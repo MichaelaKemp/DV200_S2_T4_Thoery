@@ -12,70 +12,62 @@
 
 /* Card Styling */
 .details-container {
-  width: 90%; /* Reduce width to fit within the screen */
-  max-width: 550px;
+  width: 650px; /* Original card width */
   margin: 0 auto;
-  padding: 15px;
+  padding: 8px;
   text-align: center;
   background-color: #fff;
   border: 4px solid black;
   box-shadow: 8px 8px 0px #ffdd00, 8px 8px 0px 4px black;
-  max-height: 75vh;
-  overflow-y: auto;
-  box-sizing: border-box; /* Include padding and border in the element's width */
+  max-height: 90vh;
+  overflow: auto;
 }
 
 /* Hero Title */
 .details-container h1 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #ff0000;
   text-shadow: 2px 2px #000;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 /* Hero Image */
 .details-container img {
-  max-width: 60%;
+  max-width: 30%;
   height: auto;
   margin-bottom: 8px;
 }
 
-/* Hero Info */
-.details-container p {
-  font-size: 0.9rem;
-  color: #333;
-  margin: 4px 0;
-}
-
 /* Power Stats */
 .power-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three columns for 3x3 layout */
-  gap: 10px;
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
   padding: 0;
   list-style: none;
-  max-width: 100%; /* Ensure it fits within the card */
-  margin: 0 auto;
 }
 
 .power-stats li {
   position: relative;
-  font-size: 1rem; /* Increase font size */
-  padding-left: 20px; /* Make space for the dot */
-  text-align: left; /* Align text for better readability */
+  font-size: 0.9rem;
+  padding-left: 10px;
 }
 
-/* Align the red dot */
 .power-stats li::before {
   content: '•';
   position: absolute;
   left: 0;
-  top: 0;
   color: red;
-  font-size: 1.2rem; /* Adjust dot size */
-  line-height: 1;
+  font-size: 1.2rem;
+}
+
+/* Hero Info */
+.details-container p {
+  font-size: 1rem;
+  color: #333;
+  margin: 4px 0;
 }
 
 /* Back Button */
@@ -85,8 +77,8 @@
   left: 10px;
   background-color: #ffdd00;
   color: #000;
-  padding: 8px 16px;
-  font-size: 0.9rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
@@ -97,19 +89,18 @@
 /* Navigation Buttons */
 .navigation-buttons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  width: calc(100% - 50px);
   position: absolute;
-  bottom: 15px;
-  width: 100%;
+  bottom: 20px;
+  padding: 0 25px;
 }
 
-/* Individual Button Styles */
 .prev-button, .next-button {
   background-color: #ffdd00;
   color: #000;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
@@ -120,52 +111,65 @@
 /* Responsive Design - Media Queries */
 @media (max-width: 768px) {
   .details-container {
-    width: 95%; /* Increase width to fit smaller screens */
-    max-width: 95%; /* Ensure it doesn't exceed the screen size */
-    padding: 10px;
+    width: 90%; /* Reduce width for smaller screens */
+    max-width: 550px;
+    padding: 15px; /* Increase padding for smaller screens */
+    box-sizing: border-box; /* Include padding and border in the element's width */
+    max-height: 75vh; /* Adjust max height */
+    overflow-y: auto; /* Enable scrolling */
+  }
+
+  .details-container h1 {
+    font-size: 1.4rem; /* Reduce title font size */
   }
 
   .details-container img {
-    max-width: 50%;
+    max-width: 50%; /* Increase image size */
+  }
+
+  .power-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns layout */
+    gap: 10px;
   }
 
   .power-stats li {
-    font-size: 0.85rem; /* Slightly reduce size for smaller screens */
-  }
-
-  .navigation-buttons {
-    width: 90%;
-    gap: 15px;
+    font-size: 0.85rem; /* Slightly smaller font for compactness */
   }
 
   .back-button, .prev-button, .next-button {
-    font-size: 0.9rem;
-    padding: 8px 14px;
+    font-size: 1rem; /* Reduce button font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+
+  .navigation-buttons {
+    width: 95%;
+    gap: 15px; /* Reduce gap */
   }
 }
 
 @media (max-width: 480px) {
   .details-container {
-    width: 100%;
+    width: 100%; /* Full width for very small screens */
     max-width: 100%;
-    padding: 10px;
+    padding: 10px; /* Adjust padding */
   }
 
   .details-container h1 {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Further reduce title font size */
   }
 
   .details-container img {
-    max-width: 45%;
+    max-width: 45%; /* Adjust image size */
   }
 
   .power-stats li {
-    font-size: 0.8rem; /* Further reduce for very small screens */
+    font-size: 0.8rem; /* Smaller font size for very small screens */
   }
 
   .navigation-buttons {
-    flex-direction: row;
+    flex-direction: column; /* Stack buttons vertically */
     width: 100%;
-    bottom: 10px;
+    bottom: 10px; /* Adjust position */
   }
 }
