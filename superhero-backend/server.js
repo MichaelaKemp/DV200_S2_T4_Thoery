@@ -8,6 +8,7 @@ const url = require('url'); // To parse the database URL
 
 const app = express();
 const PORT = process.env.PORT || 3001; // Use Heroku's port or default to 3001
+const heroCache = new Map();
 
 // Use CORS middleware with additional options
 app.use(cors({
@@ -135,22 +136,25 @@ app.get('/api/superhero', async (req, res) => {
 // API endpoint to fetch superhero by ID
 app.get('/api/superhero/:id', async (req, res) => {
   const heroId = req.params.id;
+
+  // Check if hero data is already cached
+  if (heroCache.has(heroId)) {
+    return res.json(heroCache.get(heroId));
+  }
+
   try {
     const apiKey = process.env.SUPERHERO_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ message: 'API key is missing' });
-    }
-
     const heroUrl = `https://superheroapi.com/api/${apiKey}/${heroId}`;
     const response = await axios.get(heroUrl);
 
     if (response.data && response.data.response === 'success') {
+      heroCache.set(heroId, response.data); // Cache the hero data
       res.json(response.data);
     } else {
       res.status(404).json({ message: `No superhero found with ID: ${heroId}` });
     }
   } catch (error) {
-    console.error('Error fetching superhero details:', error.response?.data || error.message);
+    console.error('Error fetching superhero details:', error.message);
     res.status(500).json({ message: 'Error fetching superhero data.' });
   }
 });
