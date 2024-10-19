@@ -1,83 +1,120 @@
 /* Layout Container */
 .layout-container {
-    padding: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  /* Navbar container */
-  .navbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  /* Navbar styling */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffdd00;
-    padding: 20px;
-    border-bottom: 5px solid black;
-    box-shadow: 5px 5px 0px black, 5px 5px 0px 5px #ff0000;
-  }
-  
-  /* Navbar brand (logo and title side by side) */
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Space between logo and title */
-  }
-  
-  /* Navbar title */
-  .navbar-title {
-    font-size: 2.5rem;
-    color: #ff0000;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0;
-    text-shadow: 3px 3px 0px black;
-  }
-  
-  /* Navbar links */
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Navbar container */
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffdd00;
+  padding: 20px;
+  border-bottom: 5px solid black;
+  box-shadow: 5px 5px 0px black, 5px 5px 0px 5px #ff0000;
+}
+
+/* Navbar brand (logo and title side by side) */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Navbar title */
+.navbar-title {
+  font-size: 2.5rem;
+  color: #ff0000;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 3px 3px 0px black;
+}
+
+/* Navbar links */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+.navbar-links a {
+  color: #000;
+  background-color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 3px solid black;
+  box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+/* Burger menu button */
+.burger-menu {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Logo styling */
+.logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffdd00;
+  margin-right: 20px;
+}
+
+/* Content container */
+.content {
+  padding: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .navbar-links {
-    list-style: none;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: #ffdd00;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 2px solid black;
+  }
+
+  .navbar-links.navbar-active {
     display: flex;
-    gap: 20px;
-    margin: 0;
   }
-  
-  .navbar-links a {
-    color: #000;
-    background-color: #fff;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 3px solid black;
-    box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
-    transition: background-color 0.3s ease;
+
+  .burger-menu {
+    display: block;
   }
-  
-  .navbar-links a:hover {
-    background-color: #ff0000;
-    color: #fff;
+
+  .navbar-title {
+    font-size: 1.8rem;
   }
-  
-  /* Logo styling */
-  .logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ffdd00; /* Optional border for comic book look */
-    margin-right: 20px;
-  }
-  
-  /* Content container */
-  .content {
-    padding: 20px;
-  }  
+}
