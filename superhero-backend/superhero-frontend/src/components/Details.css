@@ -114,7 +114,7 @@ h1 {
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Comic Sans MS', sans-serif;
   box-shadow: 3px 3px 0px black, 3px 3px 0px 3px #ff0000;
 }
 
