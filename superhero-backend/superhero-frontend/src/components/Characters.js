@@ -115,7 +115,6 @@ const Characters = () => {
 
         {error && <p className="error-message">{error}</p>}
 
-        <label className="alignment-label">Filter by Alignment:</label>
         <div className="alignment-dropdown">
           <select id="alignment" value={alignment} onChange={(e) => setAlignment(e.target.value)}>
             <option value="">All Alignments</option>
